@@ -263,13 +263,13 @@
       opacity: 0.6;
     }
 
-    /* score-btn kleuren per niveau */
-    .score-btn.active[data-score="1"] { background: #B71C1C; border-color: #B71C1C; }
-    .score-btn.active[data-score="2"] { background: #E64A19; border-color: #E64A19; }
-    .score-btn.active[data-score="3"] { background: #F57F17; border-color: #F57F17; }
-    .score-btn.active[data-score="4"] { background: #558B2F; border-color: #558B2F; }
-    .score-btn.active[data-score="5"] { background: #2E7D32; border-color: #2E7D32; }
-    .score-btn.active[data-score="6"] { background: #1B5E20; border-color: #1B5E20; }
+    /* score-btn kleuren per niveau — groen kleurverloop */
+    .score-btn.active[data-score="1"] { background: #C8E6C9; border-color: #C8E6C9; color: #1B5E20; }
+    .score-btn.active[data-score="2"] { background: #81C784; border-color: #81C784; color: #1B5E20; }
+    .score-btn.active[data-score="3"] { background: #4CAF50; border-color: #4CAF50; color: #fff; }
+    .score-btn.active[data-score="4"] { background: #388E3C; border-color: #388E3C; color: #fff; }
+    .score-btn.active[data-score="5"] { background: #2E7D32; border-color: #2E7D32; color: #fff; }
+    .score-btn.active[data-score="6"] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
 
     /* ── Acties ── */
     .acties-bar {
@@ -1214,7 +1214,7 @@
   let geschiedenisRadar = null;
 
   function scoreKleur(n) {
-    const kleuren = ['#B71C1C','#E64A19','#F57F17','#558B2F','#2E7D32','#1B5E20'];
+    const kleuren = ['#C8E6C9','#81C784','#4CAF50','#388E3C','#2E7D32','#1B5E20'];
     return n >= 1 && n <= 6 ? kleuren[n-1] : '#9E9E9E';
   }
 
