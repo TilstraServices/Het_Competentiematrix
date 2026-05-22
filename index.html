@@ -1,1125 +1,1385 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Competentiematrix – Junior Payroll Professional</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    :root {
-      --lms-green: #2E7D32;
-      --lms-green-light: #E8F5E9;
-      --lms-green-mid: #4CAF50;
-      --lms-green-dark: #1B5E20;
-      --lms-red: #C62828;
-      --lms-red-light: #FFEBEE;
-      --lms-orange: #E65100;
-      --lms-orange-light: #FFF3E0;
-      --gray-50: #FAFAFA;
-      --gray-100: #F5F5F5;
-      --gray-200: #EEEEEE;
-      --gray-300: #E0E0E0;
-      --gray-500: #9E9E9E;
-      --gray-700: #616161;
-      --gray-900: #212121;
-      --radius: 10px;
-      --shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Competentiematrix – Junior Payroll Professional</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+      :root {
+        --lms-green: #2e7d32;
+        --lms-green-light: #e8f5e9;
+        --lms-green-mid: #4caf50;
+        --lms-green-dark: #1b5e20;
+        --lms-red: #c62828;
+        --lms-red-light: #ffebee;
+        --lms-orange: #e65100;
+        --lms-orange-light: #fff3e0;
+        --gray-50: #fafafa;
+        --gray-100: #f5f5f5;
+        --gray-200: #eeeeee;
+        --gray-300: #e0e0e0;
+        --gray-500: #9e9e9e;
+        --gray-700: #616161;
+        --gray-900: #212121;
+        --radius: 10px;
+        --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--gray-100);
-      color: var(--gray-900);
-      min-height: 100vh;
-      padding: 24px 16px 48px;
-    }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--gray-100);
+        color: var(--gray-900);
+        min-height: 100vh;
+        padding: 24px 16px 48px;
+      }
 
-    /* ── Header card ── */
-    .header-card {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      border-left: 5px solid var(--lms-green);
-      box-shadow: var(--shadow);
-      padding: 20px 24px;
-      max-width: 900px;
-      margin: 0 auto 20px;
-    }
-    .header-card h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--lms-green-dark);
-      margin-bottom: 4px;
-    }
-    .header-card .subtitle {
-      font-size: 0.85rem;
-      color: var(--gray-700);
-    }
-    .header-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    .meta-field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      flex: 1;
-      min-width: 180px;
-    }
-    .meta-field label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--gray-500);
-    }
-    .meta-field input {
-      border: 1px solid var(--gray-300);
-      border-radius: 6px;
-      padding: 6px 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      color: var(--gray-900);
-      background: var(--gray-50);
-    }
-    .meta-field input:focus {
-      outline: none;
-      border-color: var(--lms-green);
-    }
-    .meta-field input[readonly] {
-      background: var(--gray-100);
-      color: var(--gray-700);
-      cursor: default;
-    }
+      /* ── Header card ── */
+      .header-card {
+        background: #fff;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        border-left: 5px solid var(--lms-green);
+        box-shadow: var(--shadow);
+        padding: 20px 24px;
+        max-width: 900px;
+        margin: 0 auto 20px;
+      }
+      .header-card h1 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--lms-green-dark);
+        margin-bottom: 4px;
+      }
+      .header-card .subtitle {
+        font-size: 0.85rem;
+        color: var(--gray-700);
+      }
+      .header-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .meta-field {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        min-width: 180px;
+      }
+      .meta-field label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--gray-500);
+      }
+      .meta-field input {
+        border: 1px solid var(--gray-300);
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        color: var(--gray-900);
+        background: var(--gray-50);
+      }
+      .meta-field input:focus {
+        outline: none;
+        border-color: var(--lms-green);
+      }
+      .meta-field input[readonly] {
+        background: var(--gray-100);
+        color: var(--gray-700);
+        cursor: default;
+      }
 
-    /* ── Scale legend ── */
-    .legend-card {
-      background: var(--lms-green-light);
-      border: 1px solid #A5D6A7;
-      border-radius: var(--radius);
-      padding: 12px 24px;
-      max-width: 900px;
-      margin: 0 auto 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 20px;
-      align-items: center;
-    }
-    .legend-card .legend-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--lms-green-dark);
-      width: 100%;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--lms-green-dark);
-    }
-    .legend-badge {
-      background: var(--lms-green);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.75rem;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
+      /* ── Scale legend ── */
+      .legend-card {
+        background: var(--lms-green-light);
+        border: 1px solid #a5d6a7;
+        border-radius: var(--radius);
+        padding: 12px 24px;
+        max-width: 900px;
+        margin: 0 auto 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        align-items: center;
+      }
+      .legend-card .legend-title {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--lms-green-dark);
+        width: 100%;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.8rem;
+        color: var(--lms-green-dark);
+      }
+      .legend-badge {
+        background: var(--lms-green);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.75rem;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
 
-    /* ── Role banner ── */
-    .role-banner {
-      max-width: 900px;
-      margin: 0 auto 20px;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .role-banner.trainee {
-      background: var(--lms-orange-light);
-      border: 1px solid #FFCC80;
-      color: var(--lms-orange);
-    }
-    .role-banner.leidinggevende {
-      background: #E3F2FD;
-      border: 1px solid #90CAF9;
-      color: #1565C0;
-    }
+      /* ── Role banner ── */
+      .role-banner {
+        max-width: 900px;
+        margin: 0 auto 20px;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .role-banner.trainee {
+        background: var(--lms-orange-light);
+        border: 1px solid #ffcc80;
+        color: var(--lms-orange);
+      }
+      .role-banner.leidinggevende {
+        background: #e3f2fd;
+        border: 1px solid #90caf9;
+        color: #1565c0;
+      }
 
-    /* ── Competentie blok ── */
-    .competentie-blok {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      max-width: 900px;
-      margin: 0 auto 16px;
-      overflow: hidden;
-    }
-    .competentie-header {
-      background: var(--lms-green);
-      color: #fff;
-      padding: 12px 20px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .competentie-header::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 50%;
-    }
+      /* ── Competentie blok ── */
+      .competentie-blok {
+        background: #fff;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        max-width: 900px;
+        margin: 0 auto 16px;
+        overflow: hidden;
+      }
+      .competentie-header {
+        background: var(--lms-green);
+        color: #fff;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .competentie-header::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+      }
 
-    /* ── Tabel ── */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    thead tr {
-      background: var(--gray-50);
-      border-bottom: 2px solid var(--gray-200);
-    }
-    thead th {
-      padding: 10px 16px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--gray-500);
-      text-align: left;
-    }
-    thead th.center { text-align: center; }
+      /* ── Tabel ── */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      thead tr {
+        background: var(--gray-50);
+        border-bottom: 2px solid var(--gray-200);
+      }
+      thead th {
+        padding: 10px 16px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--gray-500);
+        text-align: left;
+      }
+      thead th.center {
+        text-align: center;
+      }
 
-    tbody tr {
-      border-bottom: 1px solid var(--gray-200);
-      transition: background 0.15s;
-    }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--gray-50); }
+      tbody tr {
+        border-bottom: 1px solid var(--gray-200);
+        transition: background 0.15s;
+      }
+      tbody tr:last-child {
+        border-bottom: none;
+      }
+      tbody tr:hover {
+        background: var(--gray-50);
+      }
 
-    td {
-      padding: 10px 16px;
-      font-size: 0.875rem;
-      vertical-align: middle;
-    }
-    td.indicator { color: var(--gray-700); }
-    td.center { text-align: center; }
+      td {
+        padding: 10px 16px;
+        font-size: 0.875rem;
+        vertical-align: middle;
+      }
+      td.indicator {
+        color: var(--gray-700);
+      }
+      td.center {
+        text-align: center;
+      }
 
-    /* ── Score selector ── */
-    .score-selector {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-    }
-    .score-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid var(--gray-300);
-      background: #fff;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--gray-500);
-      cursor: pointer;
-      transition: all 0.15s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .score-btn:hover:not(:disabled) {
-      border-color: var(--lms-green);
-      color: var(--lms-green);
-      background: var(--lms-green-light);
-    }
-    .score-btn.active {
-      background: var(--lms-green);
-      border-color: var(--lms-green);
-      color: #fff;
-    }
-    .score-btn:disabled {
-      cursor: default;
-      opacity: 0.6;
-    }
+      /* ── Score selector ── */
+      .score-selector {
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+      }
+      .score-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid var(--gray-300);
+        background: #fff;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--gray-500);
+        cursor: pointer;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .score-btn:hover:not(:disabled) {
+        border-color: var(--lms-green);
+        color: var(--lms-green);
+        background: var(--lms-green-light);
+      }
+      .score-btn.active {
+        background: var(--lms-green);
+        border-color: var(--lms-green);
+        color: #fff;
+      }
+      .score-btn:disabled {
+        cursor: default;
+        opacity: 0.6;
+      }
 
-    /* score-btn kleuren per niveau — groen kleurverloop */
-    .score-btn.active[data-score="1"] { background: #C8E6C9; border-color: #C8E6C9; color: #1B5E20; }
-    .score-btn.active[data-score="2"] { background: #81C784; border-color: #81C784; color: #1B5E20; }
-    .score-btn.active[data-score="3"] { background: #4CAF50; border-color: #4CAF50; color: #fff; }
-    .score-btn.active[data-score="4"] { background: #388E3C; border-color: #388E3C; color: #fff; }
-    .score-btn.active[data-score="5"] { background: #2E7D32; border-color: #2E7D32; color: #fff; }
-    .score-btn.active[data-score="6"] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+      /* score-btn kleuren per niveau — groen kleurverloop */
+      .score-btn.active[data-score="1"] {
+        background: #c8e6c9;
+        border-color: #c8e6c9;
+        color: #1b5e20;
+      }
+      .score-btn.active[data-score="2"] {
+        background: #81c784;
+        border-color: #81c784;
+        color: #1b5e20;
+      }
+      .score-btn.active[data-score="3"] {
+        background: #4caf50;
+        border-color: #4caf50;
+        color: #fff;
+      }
+      .score-btn.active[data-score="4"] {
+        background: #388e3c;
+        border-color: #388e3c;
+        color: #fff;
+      }
+      .score-btn.active[data-score="5"] {
+        background: #2e7d32;
+        border-color: #2e7d32;
+        color: #fff;
+      }
+      .score-btn.active[data-score="6"] {
+        background: #1b5e20;
+        border-color: #1b5e20;
+        color: #fff;
+      }
 
-    /* ── Acties ── */
-    .acties-bar {
-      max-width: 900px;
-      margin: 24px auto 0;
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-    }
-    .btn {
-      padding: 10px 24px;
-      border-radius: 50px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-    }
-    .btn-primary {
-      background: var(--lms-green);
-      color: #fff;
-    }
-    .btn-primary:hover { background: var(--lms-green-dark); }
-    .btn-secondary {
-      background: var(--gray-200);
-      color: var(--gray-700);
-    }
-    .btn-secondary:hover { background: var(--gray-300); }
+      /* ── Acties ── */
+      .acties-bar {
+        max-width: 900px;
+        margin: 24px auto 0;
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+      }
+      .btn {
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+      }
+      .btn-primary {
+        background: var(--lms-green);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--lms-green-dark);
+      }
+      .btn-secondary {
+        background: var(--gray-200);
+        color: var(--gray-700);
+      }
+      .btn-secondary:hover {
+        background: var(--gray-300);
+      }
 
-    /* ── Feedback bar ── */
-    .feedback-bar {
-      max-width: 900px;
-      margin: 16px auto 0;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    .feedback-bar.success {
-      background: var(--lms-green-light);
-      border: 1px solid #A5D6A7;
-      color: var(--lms-green-dark);
-      display: flex;
-    }
-    .feedback-bar.error {
-      background: var(--lms-red-light);
-      border: 1px solid #EF9A9A;
-      color: var(--lms-red);
-      display: flex;
-    }
-    .feedback-bar .icon { font-size: 1.1rem; }
+      /* ── Feedback bar ── */
+      .feedback-bar {
+        max-width: 900px;
+        margin: 16px auto 0;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: none;
+        align-items: center;
+        gap: 10px;
+      }
+      .feedback-bar.success {
+        background: var(--lms-green-light);
+        border: 1px solid #a5d6a7;
+        color: var(--lms-green-dark);
+        display: flex;
+      }
+      .feedback-bar.error {
+        background: var(--lms-red-light);
+        border: 1px solid #ef9a9a;
+        color: var(--lms-red);
+        display: flex;
+      }
+      .feedback-bar .icon {
+        font-size: 1.1rem;
+      }
 
-    /* ── Loading ── */
-    #loading {
-      max-width: 900px;
-      margin: 40px auto;
-      text-align: center;
-      color: var(--gray-500);
-      font-size: 0.9rem;
-    }
-    .spinner {
-      width: 32px;
-      height: 32px;
-      border: 3px solid var(--gray-200);
-      border-top-color: var(--lms-green);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 12px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+      /* ── Loading ── */
+      #loading {
+        max-width: 900px;
+        margin: 40px auto;
+        text-align: center;
+        color: var(--gray-500);
+        font-size: 0.9rem;
+      }
+      .spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid var(--gray-200);
+        border-top-color: var(--lms-green);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 12px;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-    #app { display: none; }
+      #app {
+        display: none;
+      }
 
-    /* ── Radar chart card ── */
-    .radar-card {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      border-left: 5px solid var(--lms-green);
-      box-shadow: var(--shadow);
-      max-width: 900px;
-      margin: 0 auto 20px;
-      padding: 20px 24px;
-    }
-    .radar-card h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--lms-green-dark);
-      margin-bottom: 16px;
-      text-align: center;
-    }
-    .radar-legend {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-top: 14px;
-    }
-    .radar-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 0.8rem;
-      color: var(--gray-700);
-    }
-    .radar-legend-dot {
-      width: 28px;
-      height: 3px;
-      border-radius: 2px;
-    }
-    #radar-canvas-wrap {
-      display: flex;
-      justify-content: center;
-    }
-    #radar-canvas-wrap canvas {
-      max-width: 100%;
-    }
+      /* ── Radar chart card ── */
+      .radar-card {
+        background: #fff;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        border-left: 5px solid var(--lms-green);
+        box-shadow: var(--shadow);
+        max-width: 900px;
+        margin: 0 auto 20px;
+        padding: 20px 24px;
+      }
+      .radar-card h2 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--lms-green-dark);
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .radar-legend {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 14px;
+      }
+      .radar-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 0.8rem;
+        color: var(--gray-700);
+      }
+      .radar-legend-dot {
+        width: 28px;
+        height: 3px;
+        border-radius: 2px;
+      }
+      #radar-canvas-wrap {
+        display: flex;
+        justify-content: center;
+      }
+      #radar-canvas-wrap canvas {
+        max-width: 100%;
+      }
 
-    /* ── Inlogscherm ── */
-    #login-screen {
-      display: none;
-      max-width: 480px;
-      margin: 80px auto;
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      border-left: 5px solid var(--lms-green);
-      box-shadow: var(--shadow);
-      padding: 32px 28px;
-    }
-    #login-screen h2 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--lms-green-dark);
-      margin-bottom: 6px;
-    }
-    #login-screen p {
-      font-size: 0.85rem;
-      color: var(--gray-700);
-      margin-bottom: 24px;
-    }
-    #login-screen label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--gray-500);
-      margin-bottom: 6px;
-    }
-    #login-email-input {
-      width: 100%;
-      border: 1px solid var(--gray-300);
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: var(--gray-900);
-      margin-bottom: 16px;
-    }
-    #login-email-input:focus {
-      outline: none;
-      border-color: var(--lms-green);
-    }
-    #login-error {
-      font-size: 0.82rem;
-      color: var(--lms-red);
-      margin-bottom: 12px;
-      display: none;
-    }
-    .uitloggen-link {
-      font-size: 0.78rem;
-      color: var(--gray-500);
-      cursor: pointer;
-      text-decoration: underline;
-      margin-left: 12px;
-    }
-    .uitloggen-link:hover { color: var(--lms-red); }
+      /* ── Inlogscherm ── */
+      #login-screen {
+        display: none;
+        max-width: 480px;
+        margin: 80px auto;
+        background: #fff;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        border-left: 5px solid var(--lms-green);
+        box-shadow: var(--shadow);
+        padding: 32px 28px;
+      }
+      #login-screen h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--lms-green-dark);
+        margin-bottom: 6px;
+      }
+      #login-screen p {
+        font-size: 0.85rem;
+        color: var(--gray-700);
+        margin-bottom: 24px;
+      }
+      #login-screen label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--gray-500);
+        margin-bottom: 6px;
+      }
+      #login-email-input {
+        width: 100%;
+        border: 1px solid var(--gray-300);
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        color: var(--gray-900);
+        margin-bottom: 16px;
+      }
+      #login-email-input:focus {
+        outline: none;
+        border-color: var(--lms-green);
+      }
+      #login-error {
+        font-size: 0.82rem;
+        color: var(--lms-red);
+        margin-bottom: 12px;
+        display: none;
+      }
+      .uitloggen-link {
+        font-size: 0.78rem;
+        color: var(--gray-500);
+        cursor: pointer;
+        text-decoration: underline;
+        margin-left: 12px;
+      }
+      .uitloggen-link:hover {
+        color: var(--lms-red);
+      }
 
-    /* ── Geschiedenis modal ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 24px 16px;
-      overflow-y: auto;
-    }
-    .modal-overlay.actief { display: flex; }
-    .modal {
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
-      width: 100%;
-      max-width: 860px;
-      overflow: hidden;
-    }
-    .modal-header {
-      background: var(--lms-green);
-      color: #fff;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .modal-header h2 { font-size: 1rem; font-weight: 700; }
-    .modal-sluit {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.4rem;
-      cursor: pointer;
-      line-height: 1;
-      padding: 0 4px;
-    }
-    .modal-body { padding: 20px 24px; }
+      /* ── Geschiedenis modal ── */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 24px 16px;
+        overflow-y: auto;
+      }
+      .modal-overlay.actief {
+        display: flex;
+      }
+      .modal {
+        background: #fff;
+        border-radius: var(--radius);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 860px;
+        overflow: hidden;
+      }
+      .modal-header {
+        background: var(--lms-green);
+        color: #fff;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .modal-header h2 {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .modal-sluit {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.4rem;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0 4px;
+      }
+      .modal-body {
+        padding: 20px 24px;
+      }
 
-    .snapshot-lijst { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-    .snapshot-kaart {
-      border: 2px solid var(--gray-200);
-      border-radius: 8px;
-      padding: 12px 16px;
-      cursor: pointer;
-      transition: all 0.15s;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .snapshot-kaart:hover { border-color: var(--lms-green); background: var(--lms-green-light); }
-    .snapshot-kaart.actief { border-color: var(--lms-green); background: var(--lms-green-light); }
-    .snapshot-kaart .datum { font-weight: 600; font-size: 0.9rem; color: var(--gray-900); }
-    .snapshot-kaart .door { font-size: 0.78rem; color: var(--gray-500); margin-top: 2px; }
-    .snapshot-kaart .pijl { color: var(--lms-green); font-size: 1.1rem; }
+      .snapshot-lijst {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .snapshot-kaart {
+        border: 2px solid var(--gray-200);
+        border-radius: 8px;
+        padding: 12px 16px;
+        cursor: pointer;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .snapshot-kaart:hover {
+        border-color: var(--lms-green);
+        background: var(--lms-green-light);
+      }
+      .snapshot-kaart.actief {
+        border-color: var(--lms-green);
+        background: var(--lms-green-light);
+      }
+      .snapshot-kaart .datum {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--gray-900);
+      }
+      .snapshot-kaart .door {
+        font-size: 0.78rem;
+        color: var(--gray-500);
+        margin-top: 2px;
+      }
+      .snapshot-kaart .pijl {
+        color: var(--lms-green);
+        font-size: 1.1rem;
+      }
 
-    .snapshot-detail { display: none; }
-    .snapshot-detail.actief { display: block; }
+      .snapshot-detail {
+        display: none;
+      }
+      .snapshot-detail.actief {
+        display: block;
+      }
 
-    .snapshot-radar-wrap { display: flex; justify-content: center; margin: 16px 0; }
+      .snapshot-radar-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 16px 0;
+      }
 
-    .snapshot-tabel { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.82rem; }
-    .snapshot-tabel th { padding: 7px 12px; background: var(--gray-50); border-bottom: 2px solid var(--gray-200); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray-500); text-align: left; }
-    .snapshot-tabel td { padding: 7px 12px; border-bottom: 1px solid var(--gray-200); vertical-align: middle; }
-    .snapshot-tabel tr:last-child td { border-bottom: none; }
-    .snapshot-tabel .competentie-rij td { background: var(--lms-green); color: #fff; font-weight: 700; padding: 6px 12px; }
+      .snapshot-tabel {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        font-size: 0.82rem;
+      }
+      .snapshot-tabel th {
+        padding: 7px 12px;
+        background: var(--gray-50);
+        border-bottom: 2px solid var(--gray-200);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--gray-500);
+        text-align: left;
+      }
+      .snapshot-tabel td {
+        padding: 7px 12px;
+        border-bottom: 1px solid var(--gray-200);
+        vertical-align: middle;
+      }
+      .snapshot-tabel tr:last-child td {
+        border-bottom: none;
+      }
+      .snapshot-tabel .competentie-rij td {
+        background: var(--lms-green);
+        color: #fff;
+        font-weight: 700;
+        padding: 6px 12px;
+      }
 
-    .score-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      font-weight: 700;
-      font-size: 0.8rem;
-      color: #fff;
-    }
-    .score-leeg { width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; color: var(--gray-300); font-size: 0.8rem; }
+      .score-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 0.8rem;
+        color: #fff;
+      }
+      .score-leeg {
+        width: 26px;
+        height: 26px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-300);
+        font-size: 0.8rem;
+      }
 
-    .export-balk {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      padding: 16px 0 0;
-      border-top: 1px solid var(--gray-200);
-      margin-top: 16px;
-    }
-    .geen-snapshots { text-align: center; padding: 32px; color: var(--gray-500); font-size: 0.9rem; }
+      .export-balk {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 16px 0 0;
+        border-top: 1px solid var(--gray-200);
+        margin-top: 16px;
+      }
+      .geen-snapshots {
+        text-align: center;
+        padding: 32px;
+        color: var(--gray-500);
+        font-size: 0.9rem;
+      }
 
-    /* ── Leidinggevende keuzemenu ── */
-    #menu-screen {
-      display: none;
-      max-width: 560px;
-      margin: 60px auto;
-    }
-    .menu-header {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      border-left: 5px solid var(--lms-green);
-      box-shadow: var(--shadow);
-      padding: 24px 28px;
-      margin-bottom: 16px;
-    }
-    .menu-header h2 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--lms-green-dark);
-      margin-bottom: 4px;
-    }
-    .menu-header p {
-      font-size: 0.85rem;
-      color: var(--gray-700);
-    }
-    .menu-header .menu-email {
-      font-size: 0.78rem;
-      color: var(--gray-500);
-      margin-top: 8px;
-    }
-    .trainee-lijst {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .trainee-kaart {
-      background: #fff;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .trainee-kaart:hover {
-      border-color: var(--lms-green);
-      background: var(--lms-green-light);
-    }
-    .trainee-kaart .naam {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--gray-900);
-    }
-    .trainee-kaart .mail {
-      font-size: 0.78rem;
-      color: var(--gray-500);
-      margin-top: 2px;
-    }
-    .trainee-kaart .pijl {
-      font-size: 1.2rem;
-      color: var(--lms-green);
-    }
-    .menu-geen-trainees {
-      background: var(--lms-orange-light);
-      border: 1px solid #FFCC80;
-      border-radius: 8px;
-      padding: 16px 20px;
-      font-size: 0.875rem;
-      color: var(--lms-orange);
-    }
-    .terug-knop {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--lms-green);
-      cursor: pointer;
-      margin-bottom: 12px;
-      padding: 6px 0;
-    }
-    .terug-knop:hover { color: var(--lms-green-dark); }
-  </style>
-</head>
-<body>
-
-<!-- Leidinggevende keuzemenu -->
-<div id="menu-screen">
-  <div class="menu-header">
-    <h2>👤 Leidinggevende portaal</h2>
-    <p>Kies een trainee om de competentiematrix te bekijken en te beoordelen, of open je eigen matrix.</p>
-    <div class="menu-email" id="menu-email-label"></div>
-  </div>
-
-  <!-- Eigen matrix knop -->
-  <div class="trainee-kaart" id="eigen-matrix-knop" onclick="openEigenMatrix()" style="margin-bottom:6px;border-color:#1565C0;background:#E3F2FD">
-    <div>
-      <div class="naam" style="color:#1565C0">📋 Mijn eigen matrix</div>
-      <div class="mail">PTA invullen voor jezelf</div>
-    </div>
-    <span class="pijl" style="color:#1565C0">→</span>
-  </div>
-
-  <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray-500);margin:14px 0 8px">Mijn trainees</div>
-  <div class="trainee-lijst" id="trainee-lijst"></div>
-  <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center">
-    <a href="beheer.html" class="btn btn-secondary" style="text-decoration:none;font-size:0.85rem;padding:8px 18px">⚙️ Beheer</a>
-    <span class="uitloggen-link" onclick="uitloggen()">↩ Uitloggen</span>
-  </div>
-</div>
-
-<!-- Inlogscherm -->
-<div id="login-screen">
-  <h2>Competentiematrix</h2>
-  <p>Vul je e-mailadres in om je matrix te openen. Dit hoeft maar één keer.</p>
-  <label for="login-email-input">E-mailadres</label>
-  <input type="email" id="login-email-input" placeholder="naam@bedrijf.nl" autocomplete="email" />
-  <div id="login-error">Vul een geldig e-mailadres in.</div>
-  <button class="btn btn-primary" style="width:100%" onclick="bevestigLogin()">Matrix openen →</button>
-</div>
-
-<div id="loading">
-  <div class="spinner"></div>
-  Matrix laden…
-</div>
-
-<div id="app">
-
-  <!-- Terug naar menu (alleen voor leidinggevende) -->
-  <div id="terug-wrap" style="display:none;max-width:900px;margin:0 auto 8px">
-    <span class="terug-knop" onclick="toonMenu()">← Terug naar overzicht</span>
-  </div>
-
-  <!-- Header -->
-  <div class="header-card">
-    <h1>Competentiematrix – Junior Payroll Professional</h1>
-    <p class="subtitle">Ontwikkelprofiel Young Professional</p>
-    <div class="header-meta">
-      <div class="meta-field">
-        <label>Naam trainee</label>
-        <input type="text" id="field-naam" placeholder="Naam invullen…" />
+      /* ── Leidinggevende keuzemenu ── */
+      #menu-screen {
+        display: none;
+        max-width: 560px;
+        margin: 60px auto;
+      }
+      .menu-header {
+        background: #fff;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        border-left: 5px solid var(--lms-green);
+        box-shadow: var(--shadow);
+        padding: 24px 28px;
+        margin-bottom: 16px;
+      }
+      .menu-header h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--lms-green-dark);
+        margin-bottom: 4px;
+      }
+      .menu-header p {
+        font-size: 0.85rem;
+        color: var(--gray-700);
+      }
+      .menu-header .menu-email {
+        font-size: 0.78rem;
+        color: var(--gray-500);
+        margin-top: 8px;
+      }
+      .trainee-lijst {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .trainee-kaart {
+        background: #fff;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .trainee-kaart:hover {
+        border-color: var(--lms-green);
+        background: var(--lms-green-light);
+      }
+      .trainee-kaart .naam {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--gray-900);
+      }
+      .trainee-kaart .mail {
+        font-size: 0.78rem;
+        color: var(--gray-500);
+        margin-top: 2px;
+      }
+      .trainee-kaart .pijl {
+        font-size: 1.2rem;
+        color: var(--lms-green);
+      }
+      .menu-geen-trainees {
+        background: var(--lms-orange-light);
+        border: 1px solid #ffcc80;
+        border-radius: 8px;
+        padding: 16px 20px;
+        font-size: 0.875rem;
+        color: var(--lms-orange);
+      }
+      .terug-knop {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--lms-green);
+        cursor: pointer;
+        margin-bottom: 12px;
+        padding: 6px 0;
+      }
+      .terug-knop:hover {
+        color: var(--lms-green-dark);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Leidinggevende keuzemenu -->
+    <div id="menu-screen">
+      <div class="menu-header">
+        <h2>👤 Leidinggevende portaal</h2>
+        <p>
+          Kies een trainee om de competentiematrix te bekijken en te beoordelen,
+          of open je eigen matrix.
+        </p>
+        <div class="menu-email" id="menu-email-label"></div>
       </div>
-      <div class="meta-field">
-        <label>E-mailadres</label>
-        <div style="display:flex;align-items:center;gap:4px">
-          <input type="text" id="field-email" readonly style="flex:1" />
-          <span class="uitloggen-link" onclick="role === 'leidinggevende' ? toonMenu() : uitloggen()" title="Ander account" id="wissel-knop">↩ Wissel</span>
+
+      <!-- Eigen matrix knop -->
+      <div
+        class="trainee-kaart"
+        id="eigen-matrix-knop"
+        onclick="openEigenMatrix()"
+        style="margin-bottom: 6px; border-color: #1565c0; background: #e3f2fd"
+      >
+        <div>
+          <div class="naam" style="color: #1565c0">📋 Mijn eigen matrix</div>
+          <div class="mail">PTA invullen voor jezelf</div>
+        </div>
+        <span class="pijl" style="color: #1565c0">→</span>
+      </div>
+
+      <div
+        style="
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--gray-500);
+          margin: 14px 0 8px;
+        "
+      >
+        Mijn trainees
+      </div>
+      <div class="trainee-lijst" id="trainee-lijst"></div>
+      <div
+        style="
+          margin-top: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <a
+          href="beheer.html"
+          class="btn btn-secondary"
+          style="text-decoration: none; font-size: 0.85rem; padding: 8px 18px"
+          >⚙️ Beheer</a
+        >
+        <span class="uitloggen-link" onclick="uitloggen()">↩ Uitloggen</span>
+      </div>
+    </div>
+
+    <!-- Inlogscherm -->
+    <div id="login-screen">
+      <h2>Competentiematrix</h2>
+      <p>
+        Vul je e-mailadres in om je matrix te openen. Dit hoeft maar één keer.
+      </p>
+      <label for="login-email-input">E-mailadres</label>
+      <input
+        type="email"
+        id="login-email-input"
+        placeholder="naam@bedrijf.nl"
+        autocomplete="email"
+      />
+      <div id="login-error">Vul een geldig e-mailadres in.</div>
+      <button
+        class="btn btn-primary"
+        style="width: 100%"
+        onclick="bevestigLogin()"
+      >
+        Matrix openen →
+      </button>
+    </div>
+
+    <div id="loading">
+      <div class="spinner"></div>
+      Matrix laden…
+    </div>
+
+    <div id="app">
+      <!-- Terug naar menu (alleen voor leidinggevende) -->
+      <div
+        id="terug-wrap"
+        style="display: none; max-width: 900px; margin: 0 auto 8px"
+      >
+        <span class="terug-knop" onclick="toonMenu()"
+          >← Terug naar overzicht</span
+        >
+      </div>
+
+      <!-- Header -->
+      <div class="header-card">
+        <h1>Competentiematrix – Junior Payroll Professional</h1>
+        <p class="subtitle">Ontwikkelprofiel Young Professional</p>
+        <div class="header-meta">
+          <div class="meta-field">
+            <label>Naam trainee</label>
+            <input type="text" id="field-naam" placeholder="Naam invullen…" />
+          </div>
+          <div class="meta-field">
+            <label>E-mailadres</label>
+            <div style="display: flex; align-items: center; gap: 4px">
+              <input type="text" id="field-email" readonly style="flex: 1" />
+              <span
+                class="uitloggen-link"
+                onclick="role === 'leidinggevende' ? toonMenu() : uitloggen()"
+                title="Ander account"
+                id="wissel-knop"
+                >↩ Wissel</span
+              >
+            </div>
+          </div>
+          <div class="meta-field">
+            <label>Datum</label>
+            <input type="date" id="field-datum" />
+          </div>
+          <div class="meta-field">
+            <label>Praktijkbegeleider</label>
+            <input
+              type="text"
+              id="field-begeleider"
+              placeholder="Naam begeleider…"
+            />
+          </div>
         </div>
       </div>
-      <div class="meta-field">
-        <label>Datum</label>
-        <input type="date" id="field-datum" />
+
+      <!-- Schaallegenda -->
+      <div class="legend-card">
+        <span class="legend-title">Beoordelingsschaal</span>
+        <span class="legend-item"
+          ><span class="legend-badge">1</span> Startpunt</span
+        >
+        <span class="legend-item"
+          ><span class="legend-badge">2</span> Op weg</span
+        >
+        <span class="legend-item"
+          ><span class="legend-badge">3</span> Basisniveau</span
+        >
+        <span class="legend-item"
+          ><span class="legend-badge">4</span> Gevorderd</span
+        >
+        <span class="legend-item"
+          ><span class="legend-badge">5</span> Sterk</span
+        >
+        <span class="legend-item"
+          ><span class="legend-badge">6</span> Expert</span
+        >
       </div>
-      <div class="meta-field">
-        <label>Praktijkbegeleider</label>
-        <input type="text" id="field-begeleider" placeholder="Naam begeleider…" />
+
+      <!-- Rol banner -->
+      <div class="role-banner" id="role-banner"></div>
+
+      <!-- Spinnenwebdiagram -->
+      <div class="radar-card">
+        <h2>Ontwikkelprofiel Young Professional</h2>
+        <div id="radar-canvas-wrap">
+          <canvas id="radar-chart" width="620" height="500"></canvas>
+        </div>
+        <div class="radar-legend">
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background: #1565c0"></div>
+            PTA (trainee)
+          </div>
+          <div class="radar-legend-item">
+            <div class="radar-legend-dot" style="background: #c62828"></div>
+            Evaluatie (begeleider)
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Schaallegenda -->
-  <div class="legend-card">
-    <span class="legend-title">Beoordelingsschaal</span>
-    <span class="legend-item"><span class="legend-badge">1</span> Startpunt</span>
-    <span class="legend-item"><span class="legend-badge">2</span> Op weg</span>
-    <span class="legend-item"><span class="legend-badge">3</span> Basisniveau</span>
-    <span class="legend-item"><span class="legend-badge">4</span> Gevorderd</span>
-    <span class="legend-item"><span class="legend-badge">5</span> Sterk</span>
-    <span class="legend-item"><span class="legend-badge">6</span> Expert</span>
-  </div>
+      <!-- Matrix wordt hier dynamisch gegenereerd -->
+      <div id="matrix-container"></div>
 
-  <!-- Rol banner -->
-  <div class="role-banner" id="role-banner"></div>
-
-  <!-- Spinnenwebdiagram -->
-  <div class="radar-card">
-    <h2>Ontwikkelprofiel Young Professional</h2>
-    <div id="radar-canvas-wrap">
-      <canvas id="radar-chart" width="620" height="500"></canvas>
-    </div>
-    <div class="radar-legend">
-      <div class="radar-legend-item">
-        <div class="radar-legend-dot" style="background:#1565C0"></div>
-        PTA (trainee)
+      <!-- Acties -->
+      <div class="acties-bar">
+        <button class="btn btn-secondary" onclick="resetMatrix()">
+          ↺ Opnieuw
+        </button>
+        <button class="btn btn-secondary" onclick="toonGeschiedenis()">
+          📋 Geschiedenis
+        </button>
+        <button class="btn btn-primary" onclick="slaOp()">Opslaan ✓</button>
+        <button
+          class="btn btn-secondary"
+          style="margin-left: auto"
+          onclick="uitloggen()"
+        >
+          ↩ Uitloggen
+        </button>
       </div>
-      <div class="radar-legend-item">
-        <div class="radar-legend-dot" style="background:#C62828"></div>
-        Evaluatie (begeleider)
-      </div>
-    </div>
-  </div>
 
-  <!-- Matrix wordt hier dynamisch gegenereerd -->
-  <div id="matrix-container"></div>
-
-  <!-- Acties -->
-  <div class="acties-bar">
-    <button class="btn btn-secondary" onclick="resetMatrix()">↺ Opnieuw</button>
-    <button class="btn btn-secondary" onclick="toonGeschiedenis()">📋 Geschiedenis</button>
-    <button class="btn btn-primary" onclick="slaOp()">Opslaan ✓</button>
-    <button class="btn btn-secondary" style="margin-left:auto" onclick="uitloggen()">↩ Uitloggen</button>
-  </div>
-
-  <!-- Feedback -->
-  <div class="feedback-bar" id="feedback-bar">
-    <span class="icon" id="feedback-icon"></span>
-    <span id="feedback-tekst"></span>
-  </div>
-
-</div>
-
-<!-- Geschiedenis modal -->
-<div class="modal-overlay" id="geschiedenis-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <h2>📋 Geschiedenis</h2>
-      <button class="modal-sluit" onclick="sluitGeschiedenis()">×</button>
-    </div>
-    <div class="modal-body">
-      <div id="snapshot-lijst-wrap"></div>
-      <div id="snapshot-detail-wrap"></div>
-      <div class="export-balk" id="export-balk" style="display:none">
-        <button class="btn btn-primary" onclick="exporteerPDF()">⬇ Exporteer PDF</button>
+      <!-- Feedback -->
+      <div class="feedback-bar" id="feedback-bar">
+        <span class="icon" id="feedback-icon"></span>
+        <span id="feedback-tekst"></span>
       </div>
     </div>
-  </div>
-</div>
 
-<script>
-  // ══════════════════════════════════════════════════════
-  // ❶  CONFIGURATIE — vervang door jouw eigen waarden
-  // ══════════════════════════════════════════════════════
-  const SUPABASE_URL  = 'https://jgycmakaugasithuszlc.supabase.co';
-  const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpneWNtYWthdWdhc2l0aHVzemxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4Mjg1MjcsImV4cCI6MjA5NDQwNDUyN30.egxFASu1eRM1fH-zeAhM8ibXdP0Koc5JedpsX-d7j2A';
-  const TABEL         = 'competenties';
+    <!-- Geschiedenis modal -->
+    <div class="modal-overlay" id="geschiedenis-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>📋 Geschiedenis</h2>
+          <button class="modal-sluit" onclick="sluitGeschiedenis()">×</button>
+        </div>
+        <div class="modal-body">
+          <div id="snapshot-lijst-wrap"></div>
+          <div id="snapshot-detail-wrap"></div>
+          <div class="export-balk" id="export-balk" style="display: none">
+            <button class="btn btn-primary" onclick="exporteerPDF()">
+              ⬇ Exporteer PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  // ══════════════════════════════════════════════════════
-  // ❷  COMPETENTIEDATA
-  // ══════════════════════════════════════════════════════
-  const MATRIX = [
-    {
-      competentie: 'Communiceren',
-      indicatoren: [
-        { id: 'com-1', naam: 'Relatiegericht / Netwerken' },
-        { id: 'com-2', naam: 'Inlevingsvermogen / Schriftelijk communiceren' },
-        { id: 'com-3', naam: 'Toegankelijkheid / Helpen' },
-        { id: 'com-4', naam: 'Overtuigkracht / Mondeling communiceren' },
-      ]
-    },
-    {
-      competentie: 'Innovatief vermogen',
-      indicatoren: [
-        { id: 'inn-1', naam: 'Toekomstgericht' },
-        { id: 'inn-2', naam: 'Creativiteit / Creëren' },
-      ]
-    },
-    {
-      competentie: 'Ondernemend vermogen',
-      indicatoren: [
-        { id: 'ond-1', naam: 'Proactief / Initiatief nemen' },
-        { id: 'ond-2', naam: 'Profielerend vermogen' },
-        { id: 'ond-3', naam: 'Doorzettingsvermogen / Volhouden' },
-        { id: 'ond-4', naam: 'Omgevingsgerichtheid / Opmerken' },
-      ]
-    },
-    {
-      competentie: 'Ontwikkelingsgericht handelen',
-      indicatoren: [
-        { id: 'ont-1', naam: 'Reflecterend vermogen' },
-        { id: 'ont-2', naam: 'Zelfsturend vermogen / Zelfsturing en ontwikkeling' },
-      ]
-    },
-    {
-      competentie: 'Organiserend vermogen',
-      indicatoren: [
-        { id: 'org-1', naam: 'Doelgerichtheid / Plannen & Organiseren' },
-        { id: 'org-2', naam: 'Procesgerichtheid / Controleren' },
-        { id: 'org-3', naam: 'Oplossingsgericht' },
-        { id: 'org-4', naam: 'Stressbestendigheid / Functioneren onder spanning' },
-      ]
-    },
-    {
-      competentie: 'Samenwerken',
-      indicatoren: [
-        { id: 'sam-1', naam: 'Taakgerichtheid' },
-        { id: 'sam-2', naam: 'Mensgerichtheid' },
-        { id: 'sam-3', naam: 'Aanpassingsvermogen / Flexibel reageren' },
-        { id: 'sam-4', naam: 'Leiderschap / Leiding geven' },
-      ]
-    },
-    {
-      competentie: 'Probleemoplossend vermogen',
-      indicatoren: [
-        { id: 'pro-1', naam: 'Onderzoekend vermogen' },
-        { id: 'pro-2', naam: 'Analytisch vermogen / Analyseren' },
-        { id: 'pro-3', naam: 'Methodisch handelen' },
-        { id: 'pro-4', naam: 'Conceptueel vermogen' },
-        { id: 'pro-5', naam: 'Oordeelsvorming / Beslissen' },
-      ]
-    },
-  ];
+    <script>
+      // ══════════════════════════════════════════════════════
+      // ❶  CONFIGURATIE — vervang door jouw eigen waarden
+      // ══════════════════════════════════════════════════════
+      const SUPABASE_URL = "https://jgycmakaugasithuszlc.supabase.co";
+      const SUPABASE_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpneWNtYWthdWdhc2l0aHVzemxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4Mjg1MjcsImV4cCI6MjA5NDQwNDUyN30.egxFASu1eRM1fH-zeAhM8ibXdP0Koc5JedpsX-d7j2A";
+      const TABEL = "competenties";
 
-  // ══════════════════════════════════════════════════════
-  // ❸  URL-PARAMETERS UITLEZEN
-  // ══════════════════════════════════════════════════════
-  const params  = new URLSearchParams(window.location.search);
-  const role    = params.get('role') || 'trainee';
+      // ══════════════════════════════════════════════════════
+      // ❷  COMPETENTIEDATA
+      // ══════════════════════════════════════════════════════
+      const MATRIX = [
+        {
+          competentie: "Communiceren",
+          indicatoren: [
+            { id: "com-1", naam: "Relatiegericht / Netwerken" },
+            {
+              id: "com-2",
+              naam: "Inlevingsvermogen / Schriftelijk communiceren",
+            },
+            { id: "com-3", naam: "Toegankelijkheid / Helpen" },
+            { id: "com-4", naam: "Overtuigkracht / Mondeling communiceren" },
+          ],
+        },
+        {
+          competentie: "Innovatief vermogen",
+          indicatoren: [
+            { id: "inn-1", naam: "Toekomstgericht" },
+            { id: "inn-2", naam: "Creativiteit / Creëren" },
+          ],
+        },
+        {
+          competentie: "Ondernemend vermogen",
+          indicatoren: [
+            { id: "ond-1", naam: "Proactief / Initiatief nemen" },
+            { id: "ond-2", naam: "Profielerend vermogen" },
+            { id: "ond-3", naam: "Doorzettingsvermogen / Volhouden" },
+            { id: "ond-4", naam: "Omgevingsgerichtheid / Opmerken" },
+          ],
+        },
+        {
+          competentie: "Ontwikkelingsgericht handelen",
+          indicatoren: [
+            { id: "ont-1", naam: "Reflecterend vermogen" },
+            {
+              id: "ont-2",
+              naam: "Zelfsturend vermogen / Zelfsturing en ontwikkeling",
+            },
+          ],
+        },
+        {
+          competentie: "Organiserend vermogen",
+          indicatoren: [
+            { id: "org-1", naam: "Doelgerichtheid / Plannen & Organiseren" },
+            { id: "org-2", naam: "Procesgerichtheid / Controleren" },
+            { id: "org-3", naam: "Oplossingsgericht" },
+            {
+              id: "org-4",
+              naam: "Stressbestendigheid / Functioneren onder spanning",
+            },
+          ],
+        },
+        {
+          competentie: "Samenwerken",
+          indicatoren: [
+            { id: "sam-1", naam: "Taakgerichtheid" },
+            { id: "sam-2", naam: "Mensgerichtheid" },
+            { id: "sam-3", naam: "Aanpassingsvermogen / Flexibel reageren" },
+            { id: "sam-4", naam: "Leiderschap / Leiding geven" },
+          ],
+        },
+        {
+          competentie: "Probleemoplossend vermogen",
+          indicatoren: [
+            { id: "pro-1", naam: "Onderzoekend vermogen" },
+            { id: "pro-2", naam: "Analytisch vermogen / Analyseren" },
+            { id: "pro-3", naam: "Methodisch handelen" },
+            { id: "pro-4", naam: "Conceptueel vermogen" },
+            { id: "pro-5", naam: "Oordeelsvorming / Beslissen" },
+          ],
+        },
+      ];
 
-  // E-mail: voor leidinggevende via URL, voor trainee via localStorage
-  let email = params.get('email') || '';
+      // ══════════════════════════════════════════════════════
+      // ❸  URL-PARAMETERS UITLEZEN
+      // ══════════════════════════════════════════════════════
+      const params = new URLSearchParams(window.location.search);
+      const role = params.get("role") || "trainee";
 
-  // ── Login functies ──
-  function toonLoginScherm(rolHint) {
-    const scherm = document.getElementById('login-screen');
-    // Pas tekst aan op basis van rol
-    if (rolHint === 'leidinggevende') {
-      scherm.querySelector('h2').textContent = 'Leidinggevende portaal';
-      scherm.querySelector('p').textContent = 'Vul je eigen e-mailadres in om het trainee-overzicht te openen.';
-    } else {
-      scherm.querySelector('h2').textContent = 'Competentiematrix';
-      scherm.querySelector('p').textContent = 'Vul je e-mailadres in om je matrix te openen. Dit hoeft maar één keer.';
-    }
-    scherm.style.display = 'block';
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('app').style.display = 'none';
-    document.getElementById('menu-screen').style.display = 'none';
-  }
+      // E-mail: voor leidinggevende via URL, voor trainee via localStorage
+      let email = params.get("email") || "";
 
-  function bevestigLogin() {
-    const input = document.getElementById('login-email-input').value.trim().toLowerCase();
-    const geldig = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+      // ── Login functies ──
+      function toonLoginScherm(rolHint) {
+        const scherm = document.getElementById("login-screen");
+        // Pas tekst aan op basis van rol
+        if (rolHint === "leidinggevende") {
+          scherm.querySelector("h2").textContent = "Leidinggevende portaal";
+          scherm.querySelector("p").textContent =
+            "Vul je eigen e-mailadres in om het trainee-overzicht te openen.";
+        } else {
+          scherm.querySelector("h2").textContent = "Competentiematrix";
+          scherm.querySelector("p").textContent =
+            "Vul je e-mailadres in om je matrix te openen. Dit hoeft maar één keer.";
+        }
+        scherm.style.display = "block";
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("app").style.display = "none";
+        document.getElementById("menu-screen").style.display = "none";
+      }
 
-    const fout = document.getElementById('login-error');
-    if (!geldig) {
-      fout.textContent = 'Vul een geldig e-mailadres in.';
-      fout.style.display = 'block';
-      return;
-    }
-    fout.style.display = 'none';
-    document.getElementById('login-screen').querySelector('button').disabled = true;
-    document.getElementById('login-screen').querySelector('button').textContent = 'Controleren…';
+      function bevestigLogin() {
+        const input = document
+          .getElementById("login-email-input")
+          .value.trim()
+          .toLowerCase();
+        const geldig = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
 
-    // Check of email bekend is in de gebruikers tabel
-    supabaseFetch(`gebruikers?email=eq.${encodeURIComponent(input)}&select=email,rol,naam`)
-      .then(data => {
-        document.getElementById('login-screen').querySelector('button').disabled = false;
-        document.getElementById('login-screen').querySelector('button').textContent = 'Matrix openen →';
-
-        if (!data || data.length === 0) {
-          fout.textContent = 'Dit e-mailadres is onbekend. Neem contact op met de beheerder.';
-          fout.style.display = 'block';
+        const fout = document.getElementById("login-error");
+        if (!geldig) {
+          fout.textContent = "Vul een geldig e-mailadres in.";
+          fout.style.display = "block";
           return;
         }
+        fout.style.display = "none";
+        document
+          .getElementById("login-screen")
+          .querySelector("button").disabled = true;
+        document
+          .getElementById("login-screen")
+          .querySelector("button").textContent = "Controleren…";
 
-        const gebruiker = data[0];
-        const sleutel = role === 'leidinggevende' ? 'cm_lg_email' : 'cm_email';
-        localStorage.setItem(sleutel, input);
-        email = input;
-        document.getElementById('login-screen').style.display = 'none';
+        // Check of email bekend is in de gebruikers tabel
+        supabaseFetch(
+          `gebruikers?email=eq.${encodeURIComponent(input)}&select=email,rol,naam`,
+        )
+          .then((data) => {
+            document
+              .getElementById("login-screen")
+              .querySelector("button").disabled = false;
+            document
+              .getElementById("login-screen")
+              .querySelector("button").textContent = "Matrix openen →";
+
+            if (!data || data.length === 0) {
+              fout.textContent =
+                "Dit e-mailadres is onbekend. Neem contact op met de beheerder.";
+              fout.style.display = "block";
+              return;
+            }
+
+            const gebruiker = data[0];
+            const sleutel =
+              role === "leidinggevende" ? "cm_lg_email" : "cm_email";
+            localStorage.setItem(sleutel, input);
+            email = input;
+            document.getElementById("login-screen").style.display = "none";
+            toonLaadScherm();
+            if (role === "leidinggevende") {
+              laadMenuLeidinggevende();
+            } else {
+              startApp(gebruiker.naam);
+            }
+          })
+          .catch((e) => {
+            document
+              .getElementById("login-screen")
+              .querySelector("button").disabled = false;
+            document
+              .getElementById("login-screen")
+              .querySelector("button").textContent = "Matrix openen →";
+            fout.textContent = "Fout bij controleren. Probeer opnieuw.";
+            fout.style.display = "block";
+          });
+      }
+
+      function toonLaadScherm() {
+        const l = document.getElementById("loading");
+        l.style.display = "flex";
+        l.style.flexDirection = "column";
+        l.style.alignItems = "center";
+      }
+
+      function uitloggen() {
+        localStorage.removeItem("cm_email");
+        localStorage.removeItem("cm_lg_email");
+        location.reload();
+      }
+
+      // ── Leidinggevende menu ──
+      async function laadMenuLeidinggevende() {
         toonLaadScherm();
-        if (role === 'leidinggevende') {
-          laadMenuLeidinggevende();
-        } else {
-          startApp(gebruiker.naam);
+        document.getElementById("app").style.display = "none";
+        document.getElementById("menu-screen").style.display = "none";
+
+        let trainees = [];
+        try {
+          const data = await supabaseFetch(
+            `koppeling?leidinggevende_email=eq.${encodeURIComponent(email)}&select=trainee_email,trainee_naam`,
+          );
+          trainees = data || [];
+        } catch (e) {
+          console.warn("Kon koppelingen niet laden:", e.message);
         }
-      })
-      .catch(e => {
-        document.getElementById('login-screen').querySelector('button').disabled = false;
-        document.getElementById('login-screen').querySelector('button').textContent = 'Matrix openen →';
-        fout.textContent = 'Fout bij controleren. Probeer opnieuw.';
-        fout.style.display = 'block';
-      });
-  }
 
-  function toonLaadScherm() {
-    const l = document.getElementById('loading');
-    l.style.display = 'flex';
-    l.style.flexDirection = 'column';
-    l.style.alignItems = 'center';
-  }
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("menu-email-label").textContent =
+          `Ingelogd als: ${email}`;
 
-  function uitloggen() {
-    localStorage.removeItem('cm_email');
-    localStorage.removeItem('cm_lg_email');
-    location.reload();
-  }
+        const lijst = document.getElementById("trainee-lijst");
+        lijst.innerHTML = "";
 
-  // ── Leidinggevende menu ──
-  async function laadMenuLeidinggevende() {
-    toonLaadScherm();
-    document.getElementById('app').style.display = 'none';
-    document.getElementById('menu-screen').style.display = 'none';
-
-    let trainees = [];
-    try {
-      const data = await supabaseFetch(
-        `koppeling?leidinggevende_email=eq.${encodeURIComponent(email)}&select=trainee_email,trainee_naam`
-      );
-      trainees = data || [];
-    } catch(e) {
-      console.warn('Kon koppelingen niet laden:', e.message);
-    }
-
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('menu-email-label').textContent = `Ingelogd als: ${email}`;
-
-    const lijst = document.getElementById('trainee-lijst');
-    lijst.innerHTML = '';
-
-    if (trainees.length === 0) {
-      lijst.innerHTML = `<div class="menu-geen-trainees">Er zijn nog geen trainees aan jouw account gekoppeld. Neem contact op met de beheerder.</div>`;
-    } else {
-      trainees.forEach(t => {
-        const kaart = document.createElement('div');
-        kaart.className = 'trainee-kaart';
-        kaart.innerHTML = `
+        if (trainees.length === 0) {
+          lijst.innerHTML = `<div class="menu-geen-trainees">Er zijn nog geen trainees aan jouw account gekoppeld. Neem contact op met de beheerder.</div>`;
+        } else {
+          trainees.forEach((t) => {
+            const kaart = document.createElement("div");
+            kaart.className = "trainee-kaart";
+            kaart.innerHTML = `
           <div>
             <div class="naam">${t.trainee_naam || t.trainee_email}</div>
             <div class="mail">${t.trainee_email}</div>
           </div>
           <span class="pijl">→</span>`;
-        kaart.addEventListener('click', () => openTraineeMatrix(t.trainee_email, t.trainee_naam));
-        lijst.appendChild(kaart);
+            kaart.addEventListener("click", () =>
+              openTraineeMatrix(t.trainee_email, t.trainee_naam),
+            );
+            lijst.appendChild(kaart);
+          });
+        }
+
+        document.getElementById("menu-screen").style.display = "block";
+      }
+
+      async function openEigenMatrix() {
+        const lgEmail = localStorage.getItem("cm_lg_email") || email;
+        email = lgEmail;
+        document.getElementById("menu-screen").style.display = "none";
+        toonLaadScherm();
+        document.getElementById("terug-wrap").style.display = "block";
+        _eigenMatrixModus = true;
+        await startApp("Eigen matrix");
+      }
+
+      // Vlag voor eigen matrix modus
+      let _eigenMatrixModus = false;
+
+      async function openTraineeMatrix(traineeEmail, traineeNaam) {
+        _eigenMatrixModus = false;
+        email = traineeEmail;
+        document.getElementById("menu-screen").style.display = "none";
+        toonLaadScherm();
+        document.getElementById("terug-wrap").style.display = "block";
+        await startApp(traineeNaam);
+      }
+
+      function toonMenu() {
+        _eigenMatrixModus = false;
+        document.getElementById("app").style.display = "none";
+        document.getElementById("terug-wrap").style.display = "none";
+        email = localStorage.getItem("cm_lg_email") || "";
+        laadMenuLeidinggevende();
+      }
+
+      // Enter-toets in login veld
+      document.addEventListener("DOMContentLoaded", () => {
+        const inp = document.getElementById("login-email-input");
+        if (inp)
+          inp.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") bevestigLogin();
+          });
       });
-    }
 
-    document.getElementById('menu-screen').style.display = 'block';
-  }
+      // Scores worden hier opgeslagen als { indicatorId: { pta, evaluatie } }
+      let scores = {};
 
-  async function openEigenMatrix() {
-    const lgEmail = localStorage.getItem('cm_lg_email') || email;
-    email = lgEmail;
-    document.getElementById('menu-screen').style.display = 'none';
-    toonLaadScherm();
-    document.getElementById('terug-wrap').style.display = 'block';
-    _eigenMatrixModus = true;
-    await startApp('Eigen matrix');
-  }
+      // ══════════════════════════════════════════════════════
+      // ❹  SUPABASE HELPERS
+      // ══════════════════════════════════════════════════════
+      async function supabaseFetch(path, options = {}) {
+        const url = `${SUPABASE_URL}/rest/v1/${path}`;
+        const method = options.method || "GET";
+        const body = options.body || undefined;
+        const preferHeader =
+          options.headers && options.headers["Prefer"]
+            ? options.headers["Prefer"]
+            : "return=minimal";
 
-  // Vlag voor eigen matrix modus
-  let _eigenMatrixModus = false;
+        const res = await fetch(url, {
+          method,
+          headers: {
+            apikey: SUPABASE_KEY,
+            Authorization: "Bearer " + SUPABASE_KEY,
+            "Content-Type": "application/json",
+            Prefer: preferHeader,
+          },
+          body,
+        });
+        if (!res.ok) {
+          const err = await res.text();
+          throw new Error(err);
+        }
+        if (res.status === 204) return null;
+        const text = await res.text();
+        if (!text) return null;
+        return JSON.parse(text);
+      }
 
-  async function openTraineeMatrix(traineeEmail, traineeNaam) {
-    _eigenMatrixModus = false;
-    email = traineeEmail;
-    document.getElementById('menu-screen').style.display = 'none';
-    toonLaadScherm();
-    document.getElementById('terug-wrap').style.display = 'block';
-    await startApp(traineeNaam);
-  }
+      async function laadData() {
+        const data = await supabaseFetch(
+          `${TABEL}?trainee_email=eq.${encodeURIComponent(email)}&select=indicator_id,pta,evaluatie`,
+        );
+        scores = {};
+        if (data) {
+          data.forEach((r) => {
+            scores[r.indicator_id] = { pta: r.pta, evaluatie: r.evaluatie };
+          });
+        }
+      }
 
-  function toonMenu() {
-    _eigenMatrixModus = false;
-    document.getElementById('app').style.display = 'none';
-    document.getElementById('terug-wrap').style.display = 'none';
-    email = localStorage.getItem('cm_lg_email') || '';
-    laadMenuLeidinggevende();
-  }
+      async function slaScoreOp(indicatorId, kolom, waarde) {
+        await supabaseFetch(`${TABEL}?on_conflict=trainee_email,indicator_id`, {
+          method: "POST",
+          headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
+          body: JSON.stringify({
+            trainee_email: email,
+            indicator_id: indicatorId,
+            [kolom]: waarde,
+            updated_at: new Date().toISOString(),
+          }),
+        });
+      }
 
-  // Enter-toets in login veld
-  document.addEventListener('DOMContentLoaded', () => {
-    const inp = document.getElementById('login-email-input');
-    if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') bevestigLogin(); });
-  });
+      // ══════════════════════════════════════════════════════
+      // ❺  UI OPBOUWEN
+      // ══════════════════════════════════════════════════════
+      function bouwMatrix() {
+        const container = document.getElementById("matrix-container");
+        container.innerHTML = "";
 
-  // Scores worden hier opgeslagen als { indicatorId: { pta, evaluatie } }
-  let scores = {};
+        // Eigen matrix modus: leidinggevende vult alleen PTA in (als trainee)
+        const effectiefTrainee = role === "trainee" || _eigenMatrixModus;
+        const ptaDisabled = !effectiefTrainee;
+        const evalDisabled = effectiefTrainee;
 
-  // ══════════════════════════════════════════════════════
-  // ❹  SUPABASE HELPERS
-  // ══════════════════════════════════════════════════════
-  async function supabaseFetch(path, options = {}) {
-    const url = `${SUPABASE_URL}/rest/v1/${path}`;
-    const method = options.method || 'GET';
-    const body = options.body || undefined;
-    const preferHeader = (options.headers && options.headers['Prefer'])
-      ? options.headers['Prefer']
-      : 'return=minimal';
+        MATRIX.forEach((blok) => {
+          const el = document.createElement("div");
+          el.className = "competentie-blok";
 
-    const res = await fetch(url, {
-      method,
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': preferHeader,
-      },
-      body,
-    });
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(err);
-    }
-    if (res.status === 204) return null;
-    const text = await res.text();
-    if (!text) return null;
-    return JSON.parse(text);
-  }
-
-  async function laadData() {
-    const data = await supabaseFetch(
-      `${TABEL}?trainee_email=eq.${encodeURIComponent(email)}&select=indicator_id,pta,evaluatie`
-    );
-    scores = {};
-    if (data) {
-      data.forEach(r => {
-        scores[r.indicator_id] = { pta: r.pta, evaluatie: r.evaluatie };
-      });
-    }
-  }
-
-  async function slaScoreOp(indicatorId, kolom, waarde) {
-    await supabaseFetch(`${TABEL}?on_conflict=trainee_email,indicator_id`, {
-      method: 'POST',
-      headers: { 'Prefer': 'resolution=merge-duplicates,return=minimal' },
-      body: JSON.stringify({
-        trainee_email: email,
-        indicator_id: indicatorId,
-        [kolom]: waarde,
-        updated_at: new Date().toISOString(),
-      }),
-    });
-  }
-
-  // ══════════════════════════════════════════════════════
-  // ❺  UI OPBOUWEN
-  // ══════════════════════════════════════════════════════
-  function bouwMatrix() {
-    const container = document.getElementById('matrix-container');
-    container.innerHTML = '';
-
-    // Eigen matrix modus: leidinggevende vult alleen PTA in (als trainee)
-    const effectiefTrainee = role === 'trainee' || _eigenMatrixModus;
-    const ptaDisabled  = !effectiefTrainee;
-    const evalDisabled = effectiefTrainee;
-
-    MATRIX.forEach(blok => {
-      const el = document.createElement('div');
-      el.className = 'competentie-blok';
-
-      let rijen = blok.indicatoren.map(ind => {
-        const sc = scores[ind.id] || {};
-        return `
+          let rijen = blok.indicatoren
+            .map((ind) => {
+              const sc = scores[ind.id] || {};
+              return `
           <tr>
             <td class="indicator">${ind.naam}</td>
             <td class="center">
               <div class="score-selector" data-id="${ind.id}" data-kolom="pta">
-                ${[1,2,3,4,5,6].map(n => `
+                ${[1, 2, 3, 4, 5, 6]
+                  .map(
+                    (n) => `
                   <button
-                    class="score-btn ${sc.pta === n ? 'active' : ''}"
+                    class="score-btn ${sc.pta === n ? "active" : ""}"
                     data-score="${n}"
-                    ${ptaDisabled ? 'disabled' : ''}
+                    ${ptaDisabled ? "disabled" : ""}
                     onclick="setScore('${ind.id}','pta',${n},this)"
                   >${n}</button>
-                `).join('')}
+                `,
+                  )
+                  .join("")}
               </div>
             </td>
             <td class="center">
               <div class="score-selector" data-id="${ind.id}" data-kolom="evaluatie">
-                ${[1,2,3,4,5,6].map(n => `
+                ${[1, 2, 3, 4, 5, 6]
+                  .map(
+                    (n) => `
                   <button
-                    class="score-btn ${sc.evaluatie === n ? 'active' : ''}"
+                    class="score-btn ${sc.evaluatie === n ? "active" : ""}"
                     data-score="${n}"
-                    ${evalDisabled ? 'disabled' : ''}
+                    ${evalDisabled ? "disabled" : ""}
                     onclick="setScore('${ind.id}','evaluatie',${n},this)"
                   >${n}</button>
-                `).join('')}
+                `,
+                  )
+                  .join("")}
               </div>
             </td>
           </tr>`;
-      }).join('');
+            })
+            .join("");
 
-      el.innerHTML = `
+          el.innerHTML = `
         <div class="competentie-header">${blok.competentie}</div>
         <table>
           <thead>
@@ -1131,157 +1391,203 @@
           </thead>
           <tbody>${rijen}</tbody>
         </table>`;
-      container.appendChild(el);
-    });
-  }
-
-  function setScore(indicatorId, kolom, waarde, btn) {
-    // Update lokale state
-    if (!scores[indicatorId]) scores[indicatorId] = {};
-    scores[indicatorId][kolom] = waarde;
-
-    // Update UI — deactiveer andere knoppen in dezelfde rij/kolom
-    const selector = btn.closest('.score-selector');
-    selector.querySelectorAll('.score-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    // Update radar chart live
-    bouwRadar();
-  }
-
-  // ══════════════════════════════════════════════════════
-  // ❻  OPSLAAN + SNAPSHOT
-  // ══════════════════════════════════════════════════════
-  async function slaOp() {
-    verbergFeedback();
-    try {
-      const beloften = [];
-      for (const [indId, sc] of Object.entries(scores)) {
-        if (sc.pta !== undefined) beloften.push(slaScoreOp(indId, 'pta', sc.pta));
-        if (sc.evaluatie !== undefined) beloften.push(slaScoreOp(indId, 'evaluatie', sc.evaluatie));
+          container.appendChild(el);
+        });
       }
-      await Promise.all(beloften);
 
-      // Sla snapshot op
-      const opgeslagenDoor = role === 'leidinggevende'
-        ? (localStorage.getItem('cm_lg_email') || email)
-        : email;
-      await supabaseFetch('snapshots', {
-        method: 'POST',
-        headers: { 'Prefer': 'return=minimal' },
-        body: JSON.stringify({
-          trainee_email: email,
-          opgeslagen_door: opgeslagenDoor,
-          scores: scores,
-        }),
-      });
+      function setScore(indicatorId, kolom, waarde, btn) {
+        // Update lokale state
+        if (!scores[indicatorId]) scores[indicatorId] = {};
+        scores[indicatorId][kolom] = waarde;
 
-      toonFeedback('success', '✓', 'Opgeslagen! De matrix is bijgewerkt in de database.');
-    } catch (e) {
-      toonFeedback('error', '✕', 'Opslaan mislukt. Controleer je Supabase-configuratie. (' + e.message + ')');
-    }
-  }
+        // Update UI — deactiveer andere knoppen in dezelfde rij/kolom
+        const selector = btn.closest(".score-selector");
+        selector
+          .querySelectorAll(".score-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
 
-  async function resetMatrix() {
-    verbergFeedback();
-    try {
-      await laadData();
-    } catch (e) {
-      console.warn('Kon data niet herladen:', e.message);
-    }
-    if (radarChart) { radarChart.destroy(); radarChart = null; }
-    bouwMatrix();
-    bouwRadar();
-  }
+        // Update radar chart live
+        bouwRadar();
+      }
 
-  function toonFeedback(type, icon, tekst) {
-    const bar = document.getElementById('feedback-bar');
-    bar.className = 'feedback-bar ' + type;
-    document.getElementById('feedback-icon').textContent = icon;
-    document.getElementById('feedback-tekst').textContent = tekst;
-  }
+      // ══════════════════════════════════════════════════════
+      // ❻  OPSLAAN + SNAPSHOT
+      // ══════════════════════════════════════════════════════
+      async function slaOp() {
+        verbergFeedback();
+        try {
+          const beloften = [];
+          for (const [indId, sc] of Object.entries(scores)) {
+            if (sc.pta !== undefined)
+              beloften.push(slaScoreOp(indId, "pta", sc.pta));
+            if (sc.evaluatie !== undefined)
+              beloften.push(slaScoreOp(indId, "evaluatie", sc.evaluatie));
+          }
+          await Promise.all(beloften);
 
-  function verbergFeedback() {
-    document.getElementById('feedback-bar').className = 'feedback-bar';
-  }
+          // Sla snapshot op
+          const opgeslagenDoor =
+            role === "leidinggevende"
+              ? localStorage.getItem("cm_lg_email") || email
+              : email;
+          await supabaseFetch("snapshots", {
+            method: "POST",
+            headers: { Prefer: "return=minimal" },
+            body: JSON.stringify({
+              trainee_email: email,
+              opgeslagen_door: opgeslagenDoor,
+              scores: scores,
+            }),
+          });
 
-  // ══════════════════════════════════════════════════════
-  // ❾  GESCHIEDENIS & PDF EXPORT
-  // ══════════════════════════════════════════════════════
+          toonFeedback(
+            "success",
+            "✓",
+            "Opgeslagen! De matrix is bijgewerkt in de database.",
+          );
+        } catch (e) {
+          toonFeedback(
+            "error",
+            "✕",
+            "Opslaan mislukt. Controleer je Supabase-configuratie. (" +
+              e.message +
+              ")",
+          );
+        }
+      }
 
-  let snapshots = [];
-  let actiefSnapshot = null;
-  let geschiedenisRadar = null;
+      async function resetMatrix() {
+        verbergFeedback();
+        try {
+          await laadData();
+        } catch (e) {
+          console.warn("Kon data niet herladen:", e.message);
+        }
+        if (radarChart) {
+          radarChart.destroy();
+          radarChart = null;
+        }
+        bouwMatrix();
+        bouwRadar();
+      }
 
-  function scoreKleur(n) {
-    const kleuren = ['#C8E6C9','#81C784','#4CAF50','#388E3C','#2E7D32','#1B5E20'];
-    return n >= 1 && n <= 6 ? kleuren[n-1] : '#9E9E9E';
-  }
+      function toonFeedback(type, icon, tekst) {
+        const bar = document.getElementById("feedback-bar");
+        bar.className = "feedback-bar " + type;
+        document.getElementById("feedback-icon").textContent = icon;
+        document.getElementById("feedback-tekst").textContent = tekst;
+      }
 
-  async function toonGeschiedenis() {
-    document.getElementById('snapshot-lijst-wrap').innerHTML = '<div style="text-align:center;padding:24px"><div class="spinner" style="margin:0 auto"></div></div>';
-    document.getElementById('snapshot-detail-wrap').innerHTML = '';
-    document.getElementById('export-balk').style.display = 'none';
-    document.getElementById('geschiedenis-modal').classList.add('actief');
+      function verbergFeedback() {
+        document.getElementById("feedback-bar").className = "feedback-bar";
+      }
 
-    try {
-      snapshots = await supabaseFetch(
-        `snapshots?trainee_email=eq.${encodeURIComponent(email)}&order=opgeslagen_op.desc&select=id,opgeslagen_door,opgeslagen_op,scores`
-      ) || [];
-    } catch(e) {
-      snapshots = [];
-    }
+      // ══════════════════════════════════════════════════════
+      // ❾  GESCHIEDENIS & PDF EXPORT
+      // ══════════════════════════════════════════════════════
 
-    renderSnapshotLijst();
-  }
+      let snapshots = [];
+      let actiefSnapshot = null;
+      let geschiedenisRadar = null;
 
-  function sluitGeschiedenis() {
-    document.getElementById('geschiedenis-modal').classList.remove('actief');
-    if (geschiedenisRadar) { geschiedenisRadar.destroy(); geschiedenisRadar = null; }
-    actiefSnapshot = null;
-  }
+      function scoreKleur(n) {
+        const kleuren = [
+          "#C8E6C9",
+          "#81C784",
+          "#4CAF50",
+          "#388E3C",
+          "#2E7D32",
+          "#1B5E20",
+        ];
+        return n >= 1 && n <= 6 ? kleuren[n - 1] : "#9E9E9E";
+      }
 
-  function renderSnapshotLijst() {
-    const wrap = document.getElementById('snapshot-lijst-wrap');
-    if (!snapshots.length) {
-      wrap.innerHTML = '<div class="geen-snapshots">Nog geen geschiedenis beschikbaar.<br>Sla de matrix op om een snapshot te maken.</div>';
-      return;
-    }
+      async function toonGeschiedenis() {
+        document.getElementById("snapshot-lijst-wrap").innerHTML =
+          '<div style="text-align:center;padding:24px"><div class="spinner" style="margin:0 auto"></div></div>';
+        document.getElementById("snapshot-detail-wrap").innerHTML = "";
+        document.getElementById("export-balk").style.display = "none";
+        document.getElementById("geschiedenis-modal").classList.add("actief");
 
-    wrap.innerHTML = `
+        try {
+          snapshots =
+            (await supabaseFetch(
+              `snapshots?trainee_email=eq.${encodeURIComponent(email)}&order=opgeslagen_op.desc&select=id,opgeslagen_door,opgeslagen_op,scores`,
+            )) || [];
+        } catch (e) {
+          snapshots = [];
+        }
+
+        renderSnapshotLijst();
+      }
+
+      function sluitGeschiedenis() {
+        document
+          .getElementById("geschiedenis-modal")
+          .classList.remove("actief");
+        if (geschiedenisRadar) {
+          geschiedenisRadar.destroy();
+          geschiedenisRadar = null;
+        }
+        actiefSnapshot = null;
+      }
+
+      function renderSnapshotLijst() {
+        const wrap = document.getElementById("snapshot-lijst-wrap");
+        if (!snapshots.length) {
+          wrap.innerHTML =
+            '<div class="geen-snapshots">Nog geen geschiedenis beschikbaar.<br>Sla de matrix op om een snapshot te maken.</div>';
+          return;
+        }
+
+        wrap.innerHTML = `
       <p style="font-size:0.82rem;color:var(--gray-500);margin-bottom:12px">Klik op een moment om de matrix van dat moment te bekijken.</p>
       <div class="snapshot-lijst">
-        ${snapshots.map((s, i) => {
-          const datum = new Date(s.opgeslagen_op);
-          const datumStr = datum.toLocaleDateString('nl-NL', { day:'2-digit', month:'2-digit', year:'numeric' });
-          const tijdStr  = datum.toLocaleTimeString('nl-NL', { hour:'2-digit', minute:'2-digit' });
-          return `<div class="snapshot-kaart" onclick="toonSnapshotDetail(${i})" id="snap-kaart-${i}">
+        ${snapshots
+          .map((s, i) => {
+            const datum = new Date(s.opgeslagen_op);
+            const datumStr = datum.toLocaleDateString("nl-NL", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            });
+            const tijdStr = datum.toLocaleTimeString("nl-NL", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+            return `<div class="snapshot-kaart" onclick="toonSnapshotDetail(${i})" id="snap-kaart-${i}">
             <div>
               <div class="datum">📸 ${datumStr} om ${tijdStr}</div>
               <div class="door">Opgeslagen door: ${s.opgeslagen_door}</div>
             </div>
             <span class="pijl">→</span>
           </div>`;
-        }).join('')}
+          })
+          .join("")}
       </div>`;
-  }
+      }
 
-  function toonSnapshotDetail(index) {
-    // Markeer actieve kaart
-    snapshots.forEach((_, i) => {
-      const k = document.getElementById(`snap-kaart-${i}`);
-      if (k) k.classList.toggle('actief', i === index);
-    });
+      function toonSnapshotDetail(index) {
+        // Markeer actieve kaart
+        snapshots.forEach((_, i) => {
+          const k = document.getElementById(`snap-kaart-${i}`);
+          if (k) k.classList.toggle("actief", i === index);
+        });
 
-    actiefSnapshot = snapshots[index];
-    const sc = actiefSnapshot.scores;
+        actiefSnapshot = snapshots[index];
+        const sc = actiefSnapshot.scores;
 
-    // Radar chart
-    const ptaData  = RADAR_IDS.map(id => (sc[id] && sc[id].pta)       ? sc[id].pta       : 0);
-    const evalData = RADAR_IDS.map(id => (sc[id] && sc[id].evaluatie)  ? sc[id].evaluatie : 0);
+        // Radar chart
+        const ptaData = RADAR_IDS.map((id) =>
+          sc[id] && sc[id].pta ? sc[id].pta : 0,
+        );
+        const evalData = RADAR_IDS.map((id) =>
+          sc[id] && sc[id].evaluatie ? sc[id].evaluatie : 0,
+        );
 
-    const detailWrap = document.getElementById('snapshot-detail-wrap');
-    detailWrap.innerHTML = `
+        const detailWrap = document.getElementById("snapshot-detail-wrap");
+        detailWrap.innerHTML = `
       <div style="margin-top:20px;border-top:1px solid var(--gray-200);padding-top:20px">
         <h3 style="font-size:0.9rem;font-weight:700;color:var(--lms-green-dark);margin-bottom:12px">Ontwikkelprofiel</h3>
         <div class="snapshot-radar-wrap"><canvas id="geschiedenis-radar" width="560" height="440"></canvas></div>
@@ -1292,329 +1598,459 @@
         <table class="snapshot-tabel" id="snapshot-scores-tabel">
           <thead><tr><th>Indicator</th><th>PTA</th><th>Evaluatie</th></tr></thead>
           <tbody>
-            ${MATRIX.map(blok => `
+            ${MATRIX.map(
+              (blok) => `
               <tr class="competentie-rij"><td colspan="3">${blok.competentie}</td></tr>
-              ${blok.indicatoren.map(ind => {
-                const s = sc[ind.id] || {};
-                const ptaPill  = s.pta       ? `<span class="score-pill" style="background:${scoreKleur(s.pta)}">${s.pta}</span>`       : `<span class="score-leeg">—</span>`;
-                const evalPill = s.evaluatie ? `<span class="score-pill" style="background:${scoreKleur(s.evaluatie)}">${s.evaluatie}</span>` : `<span class="score-leeg">—</span>`;
-                return `<tr><td>${ind.naam}</td><td>${ptaPill}</td><td>${evalPill}</td></tr>`;
-              }).join('')}
-            `).join('')}
+              ${blok.indicatoren
+                .map((ind) => {
+                  const s = sc[ind.id] || {};
+                  const ptaPill = s.pta
+                    ? `<span class="score-pill" style="background:${scoreKleur(s.pta)}">${s.pta}</span>`
+                    : `<span class="score-leeg">—</span>`;
+                  const evalPill = s.evaluatie
+                    ? `<span class="score-pill" style="background:${scoreKleur(s.evaluatie)}">${s.evaluatie}</span>`
+                    : `<span class="score-leeg">—</span>`;
+                  return `<tr><td>${ind.naam}</td><td>${ptaPill}</td><td>${evalPill}</td></tr>`;
+                })
+                .join("")}
+            `,
+            ).join("")}
           </tbody>
         </table>
       </div>`;
 
-    // Teken radar
-    if (geschiedenisRadar) { geschiedenisRadar.destroy(); geschiedenisRadar = null; }
-    const ctx = document.getElementById('geschiedenis-radar').getContext('2d');
-    geschiedenisRadar = new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: RADAR_LABELS,
-        datasets: [
-          { label: 'PTA', data: ptaData, borderColor: '#1565C0', backgroundColor: 'rgba(21,101,192,0.15)', pointBackgroundColor: '#1565C0', pointRadius: 4, borderWidth: 2 },
-          { label: 'Evaluatie', data: evalData, borderColor: '#C62828', backgroundColor: 'rgba(198,40,40,0.12)', pointBackgroundColor: '#C62828', pointRadius: 4, borderWidth: 2 },
-        ],
-      },
-      options: {
-        responsive: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          r: {
-            min: 0, max: 6,
-            ticks: { stepSize: 1, font: { size: 10, family: 'Inter' }, color: '#9E9E9E', backdropColor: 'transparent' },
-            pointLabels: { font: { size: 10, family: 'Inter' }, color: '#424242' },
-            grid: { color: '#E0E0E0' },
-            angleLines: { color: '#E0E0E0' },
-          },
-        },
-      },
-    });
-
-    document.getElementById('export-balk').style.display = 'flex';
-  }
-
-  async function exporteerPDF() {
-    if (!actiefSnapshot) return;
-
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const groen = [46, 125, 50];
-    const groenDark = [27, 94, 32];
-    const grijs = [97, 97, 97];
-    const paginaBreedte = 210;
-    const marge = 16;
-    let y = 20;
-
-    // Header
-    doc.setFillColor(...groen);
-    doc.rect(0, 0, paginaBreedte, 28, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(14);
-    doc.setFont('helvetica', 'bold');
-    doc.text('Competentiematrix – Junior Payroll Professional', marge, 12);
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'normal');
-    const datum = new Date(actiefSnapshot.opgeslagen_op);
-    const datumStr = datum.toLocaleDateString('nl-NL', { day:'2-digit', month:'2-digit', year:'numeric' });
-    const tijdStr  = datum.toLocaleTimeString('nl-NL', { hour:'2-digit', minute:'2-digit' });
-    doc.text(`Snapshot: ${datumStr} om ${tijdStr}  |  Opgeslagen door: ${actiefSnapshot.opgeslagen_door}`, marge, 20);
-    doc.text(`Trainee: ${email}`, marge, 25);
-    y = 38;
-
-    // Radar chart als afbeelding
-    const canvas = document.getElementById('geschiedenis-radar');
-    const imgData = canvas.toDataURL('image/png');
-    const radarH = 90;
-    const radarW = 120;
-    doc.addImage(imgData, 'PNG', (paginaBreedte - radarW) / 2, y, radarW, radarH);
-    y += radarH + 8;
-
-    // Legenda
-    doc.setFontSize(8);
-    doc.setTextColor(...grijs);
-    doc.setFillColor(21, 101, 192);
-    doc.rect(marge, y, 12, 2, 'F');
-    doc.text('PTA (trainee)', marge + 14, y + 1.5);
-    doc.setFillColor(198, 40, 40);
-    doc.rect(marge + 50, y, 12, 2, 'F');
-    doc.text('Evaluatie (begeleider)', marge + 64, y + 1.5);
-    y += 8;
-
-    // Scores tabel
-    const sc = actiefSnapshot.scores;
-    MATRIX.forEach(blok => {
-      // Controleer of we een nieuwe pagina nodig hebben
-      if (y > 260) { doc.addPage(); y = 20; }
-
-      // Competentie header
-      doc.setFillColor(...groen);
-      doc.rect(marge, y, paginaBreedte - marge * 2, 7, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.text(blok.competentie, marge + 3, y + 5);
-      y += 9;
-
-      // Kolomhoofden
-      doc.setFillColor(245, 245, 245);
-      doc.rect(marge, y, paginaBreedte - marge * 2, 6, 'F');
-      doc.setTextColor(...grijs);
-      doc.setFontSize(7);
-      doc.setFont('helvetica', 'normal');
-      doc.text('INDICATOR', marge + 3, y + 4.2);
-      doc.text('PTA', marge + 120, y + 4.2);
-      doc.text('EVALUATIE', marge + 145, y + 4.2);
-      y += 7;
-
-      blok.indicatoren.forEach((ind, i) => {
-        if (y > 270) { doc.addPage(); y = 20; }
-        if (i % 2 === 0) {
-          doc.setFillColor(250, 250, 250);
-          doc.rect(marge, y, paginaBreedte - marge * 2, 7, 'F');
+        // Teken radar
+        if (geschiedenisRadar) {
+          geschiedenisRadar.destroy();
+          geschiedenisRadar = null;
         }
-        doc.setTextColor(33, 33, 33);
+        const ctx = document
+          .getElementById("geschiedenis-radar")
+          .getContext("2d");
+        geschiedenisRadar = new Chart(ctx, {
+          type: "radar",
+          data: {
+            labels: RADAR_LABELS,
+            datasets: [
+              {
+                label: "PTA",
+                data: ptaData,
+                borderColor: "#1565C0",
+                backgroundColor: "rgba(21,101,192,0.15)",
+                pointBackgroundColor: "#1565C0",
+                pointRadius: 4,
+                borderWidth: 2,
+              },
+              {
+                label: "Evaluatie",
+                data: evalData,
+                borderColor: "#C62828",
+                backgroundColor: "rgba(198,40,40,0.12)",
+                pointBackgroundColor: "#C62828",
+                pointRadius: 4,
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            responsive: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              r: {
+                min: 0,
+                max: 6,
+                ticks: {
+                  stepSize: 1,
+                  font: { size: 10, family: "Inter" },
+                  color: "#9E9E9E",
+                  backdropColor: "transparent",
+                },
+                pointLabels: {
+                  font: { size: 10, family: "Inter" },
+                  color: "#424242",
+                },
+                grid: { color: "#E0E0E0" },
+                angleLines: { color: "#E0E0E0" },
+              },
+            },
+          },
+        });
+
+        document.getElementById("export-balk").style.display = "flex";
+      }
+
+      async function exporteerPDF() {
+        if (!actiefSnapshot) return;
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4",
+        });
+        const groen = [46, 125, 50];
+        const groenDark = [27, 94, 32];
+        const grijs = [97, 97, 97];
+        const paginaBreedte = 210;
+        const marge = 16;
+        let y = 20;
+
+        // Header
+        doc.setFillColor(...groen);
+        doc.rect(0, 0, paginaBreedte, 28, "F");
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.text("Competentiematrix – Junior Payroll Professional", marge, 12);
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        const datum = new Date(actiefSnapshot.opgeslagen_op);
+        const datumStr = datum.toLocaleDateString("nl-NL", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        });
+        const tijdStr = datum.toLocaleTimeString("nl-NL", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        doc.text(
+          `Snapshot: ${datumStr} om ${tijdStr}  |  Opgeslagen door: ${actiefSnapshot.opgeslagen_door}`,
+          marge,
+          20,
+        );
+        doc.text(`Trainee: ${email}`, marge, 25);
+        y = 38;
+
+        // Radar chart als afbeelding
+        const canvas = document.getElementById("geschiedenis-radar");
+        const imgData = canvas.toDataURL("image/png");
+        const radarH = 90;
+        const radarW = 120;
+        doc.addImage(
+          imgData,
+          "PNG",
+          (paginaBreedte - radarW) / 2,
+          y,
+          radarW,
+          radarH,
+        );
+        y += radarH + 8;
+
+        // Legenda
         doc.setFontSize(8);
-        doc.setFont('helvetica', 'normal');
-        doc.text(ind.naam, marge + 3, y + 4.8);
+        doc.setTextColor(...grijs);
+        doc.setFillColor(21, 101, 192);
+        doc.rect(marge, y, 12, 2, "F");
+        doc.text("PTA (trainee)", marge + 14, y + 1.5);
+        doc.setFillColor(198, 40, 40);
+        doc.rect(marge + 50, y, 12, 2, "F");
+        doc.text("Evaluatie (begeleider)", marge + 64, y + 1.5);
+        y += 8;
 
-        const s = sc[ind.id] || {};
-        if (s.pta) {
-          const kleur = scoreKleur(s.pta);
-          const r = parseInt(kleur.slice(1,3),16), g2 = parseInt(kleur.slice(3,5),16), b2 = parseInt(kleur.slice(5,7),16);
-          doc.setFillColor(r, g2, b2);
-          doc.circle(marge + 122, y + 3.5, 3, 'F');
-          doc.setTextColor(255,255,255);
-          doc.setFontSize(7);
-          doc.setFont('helvetica', 'bold');
-          doc.text(String(s.pta), marge + 120.8, y + 4.8);
-        }
-        if (s.evaluatie) {
-          const kleur = scoreKleur(s.evaluatie);
-          const r = parseInt(kleur.slice(1,3),16), g2 = parseInt(kleur.slice(3,5),16), b2 = parseInt(kleur.slice(5,7),16);
-          doc.setFillColor(r, g2, b2);
-          doc.circle(marge + 148, y + 3.5, 3, 'F');
-          doc.setTextColor(255,255,255);
-          doc.setFontSize(7);
-          doc.setFont('helvetica', 'bold');
-          doc.text(String(s.evaluatie), marge + 146.8, y + 4.8);
-        }
-        doc.setDrawColor(230, 230, 230);
-        doc.line(marge, y + 7, paginaBreedte - marge, y + 7);
-        y += 7;
-      });
-      y += 4;
-    });
-
-    // Footer
-    doc.setFontSize(7);
-    doc.setTextColor(...grijs);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Gegenereerd op ${new Date().toLocaleDateString('nl-NL')} | Tilstra Services`, marge, 290);
-
-    const naam = document.getElementById('field-naam').value || email;
-    doc.save(`Competentiematrix_${naam}_${datumStr.replace(/\//g,'-')}.pdf`);
-  }
-
-  // ══════════════════════════════════════════════════════
-  // ❽  RADAR CHART
-  // ══════════════════════════════════════════════════════
-
-  // Alle indicatoren in volgorde voor het diagram (kort label)
-  const RADAR_LABELS = [
-    'Relatiegericht','Inlevingsvermogen','Toegankelijkheid','Overtuigkracht',
-    'Toekomstgericht','Creativiteit',
-    'Proactief','Profilerend','Doorzetting','Omgevingsgericht',
-    'Reflecterend','Zelfsturend',
-    'Doelgerichtheid','Procesgerichtheid','Oplossingsgericht','Stressbestendig',
-    'Taakgericht','Mensgericht','Aanpassings-\nvermogen','Leiderschap',
-    'Onderzoekend','Analytisch','Methodisch','Conceptueel','Oordeelsvorming',
-  ];
-
-  const RADAR_IDS = [
-    'com-1','com-2','com-3','com-4',
-    'inn-1','inn-2',
-    'ond-1','ond-2','ond-3','ond-4',
-    'ont-1','ont-2',
-    'org-1','org-2','org-3','org-4',
-    'sam-1','sam-2','sam-3','sam-4',
-    'pro-1','pro-2','pro-3','pro-4','pro-5',
-  ];
-
-  let radarChart = null;
-
-  function bouwRadar() {
-    const ptaData    = RADAR_IDS.map(id => (scores[id] && scores[id].pta)      ? scores[id].pta      : 0);
-    const evalData   = RADAR_IDS.map(id => (scores[id] && scores[id].evaluatie) ? scores[id].evaluatie : 0);
-
-    const ctx = document.getElementById('radar-chart').getContext('2d');
-
-    if (radarChart) {
-      radarChart.data.datasets[0].data = ptaData;
-      radarChart.data.datasets[1].data = evalData;
-      radarChart.update();
-      return;
-    }
-
-    radarChart = new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: RADAR_LABELS,
-        datasets: [
-          {
-            label: 'PTA (trainee)',
-            data: ptaData,
-            borderColor: '#1565C0',
-            backgroundColor: 'rgba(21,101,192,0.15)',
-            pointBackgroundColor: '#1565C0',
-            pointRadius: 4,
-            borderWidth: 2,
-          },
-          {
-            label: 'Evaluatie (begeleider)',
-            data: evalData,
-            borderColor: '#C62828',
-            backgroundColor: 'rgba(198,40,40,0.12)',
-            pointBackgroundColor: '#C62828',
-            pointRadius: 4,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        responsive: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          r: {
-            min: 0,
-            max: 6,
-            ticks: {
-              stepSize: 1,
-              font: { size: 10, family: 'Inter' },
-              color: '#9E9E9E',
-              backdropColor: 'transparent',
-            },
-            pointLabels: {
-              font: { size: 10, family: 'Inter' },
-              color: '#424242',
-            },
-            grid: { color: '#E0E0E0' },
-            angleLines: { color: '#E0E0E0' },
-          },
-        },
-      },
-    });
-  }
-
-  // ══════════════════════════════════════════════════════
-  // ❼  INITIALISATIE
-  // ══════════════════════════════════════════════════════
-  async function startApp(traineeNaam) {
-    document.getElementById('field-email').value = email;
-    document.getElementById('field-datum').value = new Date().toISOString().split('T')[0];
-    if (traineeNaam) document.getElementById('field-naam').value = traineeNaam;
-
-    // Rolbanner
-    const banner = document.getElementById('role-banner');
-    if (_eigenMatrixModus) {
-      banner.className = 'role-banner trainee';
-      banner.innerHTML = `🎓 Je vult je <strong>eigen matrix</strong> in — vul de PTA-kolom in op basis van je eigen inschatting.`;
-    } else if (role === 'leidinggevende') {
-      banner.className = 'role-banner leidinggevende';
-      banner.innerHTML = `👤 Je bekijkt de matrix van <strong>${traineeNaam || email}</strong> — je kunt de evaluatiekolom invullen.`;
-    } else {
-      banner.className = 'role-banner trainee';
-      banner.innerHTML = `🎓 Je vult de matrix in als <strong>trainee</strong> — vul de PTA-kolom in op basis van je eigen inschatting.`;
-    }
-
-    try { await laadData(); } catch (e) { console.warn('Kon data niet laden:', e.message); }
-
-    // Reset radar chart voor nieuwe trainee
-    if (radarChart) { radarChart.destroy(); radarChart = null; }
-
-    bouwMatrix();
-    bouwRadar();
-
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-  }
-
-  async function init() {
-    if (role === 'leidinggevende') {
-      const opgeslagen = localStorage.getItem('cm_lg_email');
-      if (opgeslagen) {
-        // Valideer opgeslagen sessie
-        try {
-          const data = await supabaseFetch(`gebruikers?email=eq.${encodeURIComponent(opgeslagen)}&select=email`);
-          if (data && data.length > 0) {
-            email = opgeslagen;
-            laadMenuLeidinggevende();
-            return;
+        // Scores tabel
+        const sc = actiefSnapshot.scores;
+        MATRIX.forEach((blok) => {
+          // Controleer of we een nieuwe pagina nodig hebben
+          if (y > 260) {
+            doc.addPage();
+            y = 20;
           }
-        } catch(e) {}
-        localStorage.removeItem('cm_lg_email');
-      }
-      toonLoginScherm('leidinggevende');
-    } else {
-      const opgeslagen = localStorage.getItem('cm_email');
-      if (opgeslagen) {
-        try {
-          const data = await supabaseFetch(`gebruikers?email=eq.${encodeURIComponent(opgeslagen)}&select=email,naam`);
-          if (data && data.length > 0) {
-            email = opgeslagen;
-            toonLaadScherm();
-            await startApp(data[0].naam);
-            return;
-          }
-        } catch(e) {}
-        localStorage.removeItem('cm_email');
-      }
-      toonLoginScherm('trainee');
-    }
-  }
 
-  init();
-</script>
-</body>
+          // Competentie header
+          doc.setFillColor(...groen);
+          doc.rect(marge, y, paginaBreedte - marge * 2, 7, "F");
+          doc.setTextColor(255, 255, 255);
+          doc.setFontSize(9);
+          doc.setFont("helvetica", "bold");
+          doc.text(blok.competentie, marge + 3, y + 5);
+          y += 9;
+
+          // Kolomhoofden
+          doc.setFillColor(245, 245, 245);
+          doc.rect(marge, y, paginaBreedte - marge * 2, 6, "F");
+          doc.setTextColor(...grijs);
+          doc.setFontSize(7);
+          doc.setFont("helvetica", "normal");
+          doc.text("INDICATOR", marge + 3, y + 4.2);
+          doc.text("PTA", marge + 120, y + 4.2);
+          doc.text("EVALUATIE", marge + 145, y + 4.2);
+          y += 7;
+
+          blok.indicatoren.forEach((ind, i) => {
+            if (y > 270) {
+              doc.addPage();
+              y = 20;
+            }
+            if (i % 2 === 0) {
+              doc.setFillColor(250, 250, 250);
+              doc.rect(marge, y, paginaBreedte - marge * 2, 7, "F");
+            }
+            doc.setTextColor(33, 33, 33);
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "normal");
+            doc.text(ind.naam, marge + 3, y + 4.8);
+
+            const s = sc[ind.id] || {};
+            if (s.pta) {
+              const kleur = scoreKleur(s.pta);
+              const r = parseInt(kleur.slice(1, 3), 16),
+                g2 = parseInt(kleur.slice(3, 5), 16),
+                b2 = parseInt(kleur.slice(5, 7), 16);
+              doc.setFillColor(r, g2, b2);
+              doc.circle(marge + 122, y + 3.5, 3, "F");
+              doc.setTextColor(255, 255, 255);
+              doc.setFontSize(7);
+              doc.setFont("helvetica", "bold");
+              doc.text(String(s.pta), marge + 120.8, y + 4.8);
+            }
+            if (s.evaluatie) {
+              const kleur = scoreKleur(s.evaluatie);
+              const r = parseInt(kleur.slice(1, 3), 16),
+                g2 = parseInt(kleur.slice(3, 5), 16),
+                b2 = parseInt(kleur.slice(5, 7), 16);
+              doc.setFillColor(r, g2, b2);
+              doc.circle(marge + 148, y + 3.5, 3, "F");
+              doc.setTextColor(255, 255, 255);
+              doc.setFontSize(7);
+              doc.setFont("helvetica", "bold");
+              doc.text(String(s.evaluatie), marge + 146.8, y + 4.8);
+            }
+            doc.setDrawColor(230, 230, 230);
+            doc.line(marge, y + 7, paginaBreedte - marge, y + 7);
+            y += 7;
+          });
+          y += 4;
+        });
+
+        // Footer
+        doc.setFontSize(7);
+        doc.setTextColor(...grijs);
+        doc.setFont("helvetica", "normal");
+        doc.text(
+          `Gegenereerd op ${new Date().toLocaleDateString("nl-NL")} | Tilstra Services`,
+          marge,
+          290,
+        );
+
+        const naam = document.getElementById("field-naam").value || email;
+        doc.save(
+          `Competentiematrix_${naam}_${datumStr.replace(/\//g, "-")}.pdf`,
+        );
+      }
+
+      // ══════════════════════════════════════════════════════
+      // ❽  RADAR CHART
+      // ══════════════════════════════════════════════════════
+
+      // Alle indicatoren in volgorde voor het diagram (kort label)
+      const RADAR_LABELS = [
+        "Relatiegericht",
+        "Inlevingsvermogen",
+        "Toegankelijkheid",
+        "Overtuigkracht",
+        "Toekomstgericht",
+        "Creativiteit",
+        "Proactief",
+        "Profilerend",
+        "Doorzetting",
+        "Omgevingsgericht",
+        "Reflecterend",
+        "Zelfsturend",
+        "Doelgerichtheid",
+        "Procesgerichtheid",
+        "Oplossingsgericht",
+        "Stressbestendig",
+        "Taakgericht",
+        "Mensgericht",
+        "Aanpassings-\nvermogen",
+        "Leiderschap",
+        "Onderzoekend",
+        "Analytisch",
+        "Methodisch",
+        "Conceptueel",
+        "Oordeelsvorming",
+      ];
+
+      const RADAR_IDS = [
+        "com-1",
+        "com-2",
+        "com-3",
+        "com-4",
+        "inn-1",
+        "inn-2",
+        "ond-1",
+        "ond-2",
+        "ond-3",
+        "ond-4",
+        "ont-1",
+        "ont-2",
+        "org-1",
+        "org-2",
+        "org-3",
+        "org-4",
+        "sam-1",
+        "sam-2",
+        "sam-3",
+        "sam-4",
+        "pro-1",
+        "pro-2",
+        "pro-3",
+        "pro-4",
+        "pro-5",
+      ];
+
+      let radarChart = null;
+
+      function bouwRadar() {
+        const ptaData = RADAR_IDS.map((id) =>
+          scores[id] && scores[id].pta ? scores[id].pta : 0,
+        );
+        const evalData = RADAR_IDS.map((id) =>
+          scores[id] && scores[id].evaluatie ? scores[id].evaluatie : 0,
+        );
+
+        const ctx = document.getElementById("radar-chart").getContext("2d");
+
+        if (radarChart) {
+          radarChart.data.datasets[0].data = ptaData;
+          radarChart.data.datasets[1].data = evalData;
+          radarChart.update();
+          return;
+        }
+
+        radarChart = new Chart(ctx, {
+          type: "radar",
+          data: {
+            labels: RADAR_LABELS,
+            datasets: [
+              {
+                label: "PTA (trainee)",
+                data: ptaData,
+                borderColor: "#1565C0",
+                backgroundColor: "rgba(21,101,192,0.15)",
+                pointBackgroundColor: "#1565C0",
+                pointRadius: 4,
+                borderWidth: 2,
+              },
+              {
+                label: "Evaluatie (begeleider)",
+                data: evalData,
+                borderColor: "#C62828",
+                backgroundColor: "rgba(198,40,40,0.12)",
+                pointBackgroundColor: "#C62828",
+                pointRadius: 4,
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            responsive: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              r: {
+                min: 0,
+                max: 6,
+                ticks: {
+                  stepSize: 1,
+                  font: { size: 10, family: "Inter" },
+                  color: "#9E9E9E",
+                  backdropColor: "transparent",
+                },
+                pointLabels: {
+                  font: { size: 10, family: "Inter" },
+                  color: "#424242",
+                },
+                grid: { color: "#E0E0E0" },
+                angleLines: { color: "#E0E0E0" },
+              },
+            },
+          },
+        });
+      }
+
+      // ══════════════════════════════════════════════════════
+      // ❼  INITIALISATIE
+      // ══════════════════════════════════════════════════════
+      async function startApp(traineeNaam) {
+        document.getElementById("field-email").value = email;
+        document.getElementById("field-datum").value = new Date()
+          .toISOString()
+          .split("T")[0];
+        if (traineeNaam)
+          document.getElementById("field-naam").value = traineeNaam;
+
+        // Rolbanner
+        const banner = document.getElementById("role-banner");
+        if (_eigenMatrixModus) {
+          banner.className = "role-banner trainee";
+          banner.innerHTML = `🎓 Je vult je <strong>eigen matrix</strong> in — vul de PTA-kolom in op basis van je eigen inschatting.`;
+        } else if (role === "leidinggevende") {
+          banner.className = "role-banner leidinggevende";
+          banner.innerHTML = `👤 Je bekijkt de matrix van <strong>${traineeNaam || email}</strong> — je kunt de evaluatiekolom invullen.`;
+        } else {
+          banner.className = "role-banner trainee";
+          banner.innerHTML = `🎓 Je vult de matrix in als <strong>trainee</strong> — vul de PTA-kolom in op basis van je eigen inschatting.`;
+        }
+
+        try {
+          await laadData();
+        } catch (e) {
+          console.warn("Kon data niet laden:", e.message);
+        }
+
+        // Reset radar chart voor nieuwe trainee
+        if (radarChart) {
+          radarChart.destroy();
+          radarChart = null;
+        }
+
+        bouwMatrix();
+        bouwRadar();
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("app").style.display = "block";
+      }
+
+      async function init() {
+        if (role === "leidinggevende") {
+          const opgeslagen = localStorage.getItem("cm_lg_email");
+          if (opgeslagen) {
+            // Valideer opgeslagen sessie
+            try {
+              const data = await supabaseFetch(
+                `gebruikers?email=eq.${encodeURIComponent(opgeslagen)}&select=email`,
+              );
+              if (data && data.length > 0) {
+                email = opgeslagen;
+                laadMenuLeidinggevende();
+                return;
+              }
+            } catch (e) {}
+            localStorage.removeItem("cm_lg_email");
+          }
+          toonLoginScherm("leidinggevende");
+        } else {
+          const opgeslagen = localStorage.getItem("cm_email");
+          if (opgeslagen) {
+            try {
+              const data = await supabaseFetch(
+                `gebruikers?email=eq.${encodeURIComponent(opgeslagen)}&select=email,naam`,
+              );
+              if (data && data.length > 0) {
+                email = opgeslagen;
+                toonLaadScherm();
+                await startApp(data[0].naam);
+                return;
+              }
+            } catch (e) {}
+            localStorage.removeItem("cm_email");
+          }
+          toonLoginScherm("trainee");
+        }
+      }
+
+      init();
+    </script>
+  </body>
 </html>
